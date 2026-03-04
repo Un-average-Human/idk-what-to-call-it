@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://d15rnpjif8qxh"]
+
+[ext_resource type="PackedScene" uid="uid://b6bbbluqw1jrs" path="res://blimp.tscn" id="2_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://co6ldalc12ob8" path="res://player.tscn" id="2_8uh7m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37kl0"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_8uh7m"]
+sky_material = SubResource("ProceduralSkyMaterial_37kl0")
+
+[sub_resource type="Environment" id="Environment_6uqi0"]
+background_mode = 2
+sky = SubResource("Sky_8uh7m")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37kl0"]
+
+[node name="Node3D" type="Node3D" unique_id=1689576366]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=269204495]
+environment = SubResource("Environment_6uqi0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=433285588]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1715798004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+use_collision = true
+size = Vector3(30, 1, 35)
+material = SubResource("StandardMaterial3D_37kl0")
+
+[node name="CharacterBody3D" parent="." unique_id=1113979859 instance=ExtResource("2_8uh7m")]
+
+[node name="pigeon" parent="." unique_id=257643289 instance=ExtResource("2_6uqi0")]
+transform = Transform3D(0.702, 0, 0, 0, 0.702, 0, 0, 0, 0.702, 3.8928473, -0.34335768, 0.49208975)
