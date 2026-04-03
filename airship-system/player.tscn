@@ -23,3 +23,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="interact_ray" type="RayCast3D" parent="neck/player_camera" unique_id=334059208]
 transform = Transform3D(1, 0, 0, 0, -9.835062e-08, -1, 0, 2.25, -4.371139e-08, 0, 0, 0)
+collision_mask = 3
+
+[node name="right_hand" type="Marker3D" parent="neck/player_camera" unique_id=1252178117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.5, -1)
+
+[node name="left_hand" type="Marker3D" parent="neck/player_camera" unique_id=894703060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.5, -1)

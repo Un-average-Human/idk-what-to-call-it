@@ -6,6 +6,12 @@ extends CharacterBody3D
 @onready var player_camera: Camera3D = $neck/player_camera
 var SENSITIVITY := 0.01
 
+var left_grabbed_obj: RigidBody3D = null
+var right_grabbed_obj: RigidBody3D = null
+@onready var right_hand: Marker3D = $neck/player_camera/right_hand
+@onready var left_hand: Marker3D = $neck/player_camera/left_hand
+
+
 @onready var interact_ray: RayCast3D = $neck/player_camera/interact_ray
 
 var is_piloting := false
@@ -28,19 +34,48 @@ func _input(event: InputEvent) -> void:
 			rotate_y(-event.relative.x * SENSITIVITY)
 			player_camera.rotate_x(-event.relative.y * SENSITIVITY)
 			player_camera.rotation.x =clamp(player_camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
-	
+
+#left hand
+	if Input.is_action_just_pressed("F"):
+		if left_grabbed_obj == null:
+			if interact_ray.is_colliding():
+				var collider = interact_ray.get_collider()
+				add_collision_exception_with(collider)
+				left_grabbed_obj = collider
+		elif left_grabbed_obj != null:
+			remove_collision_exception_with(left_grabbed_obj)
+			left_grabbed_obj = null
+			
+#right hand
+	if Input.is_action_just_pressed("G"):
+		if right_grabbed_obj == null:
+			if interact_ray.is_colliding():
+				var collider = interact_ray.get_collider()
+				add_collision_exception_with(collider)
+				right_grabbed_obj = collider
+		elif right_grabbed_obj != null:
+			remove_collision_exception_with(right_grabbed_obj)
+			right_grabbed_obj = null
+			
+#sit
 	if Input.is_action_just_pressed("E"):
-		if interact_ray.is_colliding():
+			if !interact_ray.is_colliding():
+				return
 			var collider = interact_ray.get_collider()
-			for group in collider.get_groups():
-				match group:
-					"pilot_seat":
-						_pilot_airship(collider)
+			if collider.is_in_group("pilot_seat"):
+				_pilot_airship(collider)
 
 func _physics_process(delta: float) -> void:
 	#wont run if the player is piloting an airship or if they are seating
 	if is_piloting == true or is_seating == true:
 		return
+	if left_grabbed_obj != null:
+		left_grabbed_obj.linear_velocity = (left_hand.global_position - left_grabbed_obj.global_position) * 20
+		left_grabbed_obj.global_rotation = left_hand.global_rotation
+	if right_grabbed_obj != null:
+		right_grabbed_obj.linear_velocity = (right_hand.global_position - right_grabbed_obj.global_position) * 20
+		right_grabbed_obj.global_rotation = right_hand.global_rotation
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -61,12 +96,13 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-#extra functions
+#pilot airship function. It only allows a single player to pilot the airship as of my current knowledge
+#as I still need to add multiplayer unfortunately
 func _pilot_airship(target_airship):
 	if is_piloting == false:
 		is_piloting = true
 		collision_shape.disabled = true
-		global_position = target_airship.global_position
+		global_transform = target_airship.global_transform
 		reparent(target_airship)
 		target_airship.get_parent().player_driving = self
 	elif is_piloting == true:

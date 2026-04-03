@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ha188dx7j1ma"]
+
+[ext_resource type="Script" uid="uid://byvsoxpxhnok3" path="res://pickable.gd" id="1_y4kw4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wia32"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dc0o7"]
+
+[node name="test_package" type="RigidBody3D" unique_id=1765349153]
+script = ExtResource("1_y4kw4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=964207555]
+shape = SubResource("BoxShape3D_wia32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=406185942]
+mesh = SubResource("BoxMesh_dc0o7")
