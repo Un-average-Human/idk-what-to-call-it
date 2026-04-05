@@ -23,9 +23,23 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://airships/": "red",
+"res://airships/airship_models/": "red",
+"res://airships/airship_scenes/": "red",
+"res://airships/scripts/": "red",
+"res://delivery/": "teal",
+"res://player/": "blue"
+}
+
 [global_group]
 
 pilot_seat=""
+buy_package=""
+grabbable=""
+sell_package=""
 
 [input]
 
@@ -83,3 +97,7 @@ G={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+anti_aliasing/quality/msaa_3d=1
