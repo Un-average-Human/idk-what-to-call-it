@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bkcvgsgnv0pc"]
+
+[ext_resource type="Script" uid="uid://bh33mv4uqqxvw" path="res://delivery/scripts/package_ordering.gd" id="1_0fimk"]
+[ext_resource type="Script" uid="uid://cxsljo73gqkk1" path="res://delivery/scripts/sell_packages.gd" id="2_tsd5l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ivor6"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tdnyl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0fimk"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0fimk"]
+
+[node name="Node3D" type="Node3D" unique_id=909737545]
+
+[node name="buy_packages_button" type="StaticBody3D" parent="." unique_id=737200113 node_paths=PackedStringArray("package_spawn_pos") groups=["buy_package"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_0fimk")
+package_spawn_pos = NodePath("package_spawn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="buy_packages_button" unique_id=1632226314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+shape = SubResource("BoxShape3D_ivor6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="buy_packages_button/CollisionShape3D" unique_id=1648410942]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_tdnyl")
+skeleton = NodePath("../..")
+
+[node name="package_spawn" type="Marker3D" parent="buy_packages_button" unique_id=1047078259]
+
+[node name="sell_packages" type="Area3D" parent="." unique_id=1997588646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sell_packages" unique_id=1391939976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_0fimk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="sell_packages" unique_id=2066460043]
+transform = Transform3D(1.98, 0, 0, 0, 0.036042392, 0, 0, 0, 2.1, 0, -0.5488603, 0)
+mesh = SubResource("CylinderMesh_0fimk")
+
+[node name="sell_packages_button" type="StaticBody3D" parent="." unique_id=739739943 groups=["sell_package"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3.7)
+script = ExtResource("2_tsd5l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sell_packages_button" unique_id=1943104899]
+shape = SubResource("BoxShape3D_ivor6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="sell_packages_button/CollisionShape3D" unique_id=888805354]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_tdnyl")
+skeleton = NodePath("../..")

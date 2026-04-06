@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ha188dx7j1ma"]
+
+[ext_resource type="Script" uid="uid://cp726isxb8p48" path="res://delivery/scripts/packages.gd" id="1_4k3ec"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wia32"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dc0o7"]
+
+[node name="test_package" type="RigidBody3D" unique_id=1765349153 groups=["grabbable"]]
+can_sleep = false
+script = ExtResource("1_4k3ec")
+weight = 16
+base_price = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=964207555]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_wia32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=406185942]
+mesh = SubResource("BoxMesh_dc0o7")
