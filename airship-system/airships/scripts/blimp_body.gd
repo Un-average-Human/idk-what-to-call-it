@@ -59,7 +59,8 @@ func _physics_process(delta: float) -> void:
 		global_rotation.z = lerp_angle(global_rotation.z, deg_to_rad(steering_input * tilt_angle), 0.75 * delta)
 		angular_velocity.y = lerpf(angular_velocity.y, steering_input, smoothstep(0, 1, delta * turn_power))
 	global_rotation.x = 0.0
-	global_rotation.z = lerp(global_rotation.z, 0.0, delta)
+	angular_velocity.z = 0.0
+	global_rotation.z = lerp_angle(global_rotation.z, 0.0, delta)
 	
 #propellers
 	if current_speed != 0:

@@ -19,9 +19,13 @@ run/main_scene="uid://d15rnpjif8qxh"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*uid://x8w6hewa23gf"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/godotsteam/plugin.cfg")
 
 [file_customization]
 
@@ -31,6 +35,7 @@ folder_colors={
 "res://airships/airship_scenes/": "red",
 "res://airships/scripts/": "red",
 "res://delivery/": "teal",
+"res://others/": "purple",
 "res://player/": "blue"
 }
 
@@ -101,3 +106,10 @@ G={
 [rendering]
 
 anti_aliasing/quality/msaa_3d=1
+
+[steam]
+
+initialization/app_id=0
+initialization/initialize_on_startup=false
+initialization/embed_callbacks=false
+multiplayer_peer/max_channels=4

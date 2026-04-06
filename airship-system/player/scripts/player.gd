@@ -24,13 +24,14 @@ var SPEED := 5.0
 const JUMP_VELOCITY = 5
 
 # money
-var wallet: float = 500.0
+var wallet: float = 500.0: set = _set_wallet
 
 #main functions
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event: InputEvent) -> void:
+	#lock mouse
 	if Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	elif Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
@@ -52,7 +53,6 @@ func _input(event: InputEvent) -> void:
 		elif left_grabbed_obj != null:
 			remove_collision_exception_with(left_grabbed_obj)
 			left_grabbed_obj = null
-			
 #right hand
 	if Input.is_action_just_pressed("G"):
 		if right_grabbed_obj == null:
@@ -63,7 +63,7 @@ func _input(event: InputEvent) -> void:
 		elif right_grabbed_obj != null:
 			remove_collision_exception_with(right_grabbed_obj)
 			right_grabbed_obj = null
-			
+
 #sit
 	if Input.is_action_just_pressed("E"):
 		#sit
@@ -83,7 +83,6 @@ func _input(event: InputEvent) -> void:
 						collider._buy_package(self)
 				"sell_package":
 					if collider.has_method("_sell_package"):
-						print("method identified")
 						collider._sell_package()
 
 func _physics_process(delta: float) -> void:
@@ -94,7 +93,7 @@ func _physics_process(delta: float) -> void:
 		left_grabbed_obj.linear_velocity = (left_hand.global_position - left_grabbed_obj.global_position) * 20
 		left_grabbed_obj.global_rotation = left_hand.global_rotation
 	if right_grabbed_obj != null:
-		right_grabbed_obj.linear_velocity = (right_hand.global_position - right_grabbed_obj.global_position) * 20
+		right_grabbed_obj.linear_velocity = (right_hand.global_position - right_grabbed_obj.global_position) * 200
 		right_grabbed_obj.global_rotation = right_hand.global_rotation
 		
 	# Add the gravity.
@@ -117,8 +116,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-#pilot airship function. It only allows a single player to pilot the airship as of my current knowledge
-#as I still need to add multiplayer unfortunately
+#pilot airship and seating function. It only allows a single player to pilot the airshipor sit as of my 
+#current knowledge as I still need to add multiplayer unfortunately
 func _pilot_airship(target_airship):
 	if is_piloting == false:
 		if target_airship.get_meta("being_piloted") == true:
@@ -138,3 +137,8 @@ func _pilot_airship(target_airship):
 		global_rotation = Vector3(0, current_y, 0)
 func _sit(target_seat):
 	pass
+
+func _set_wallet(new_value):
+	if wallet != new_value:
+		wallet = new_value
+		SignalBus.update_wallet.emit(wallet)

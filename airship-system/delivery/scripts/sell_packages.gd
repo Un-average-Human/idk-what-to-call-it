@@ -15,11 +15,10 @@ var price_multipliers: Dictionary[Package.package_type, float] = {
 	}
 
 func _sell_package():
-	print("function called")
 	var packages = sell_area.get_overlapping_bodies()
 	for package in packages:
 		if package is Package:
 			var revenue = package.base_price * price_multipliers.get(package.type)
 			package.current_owner.wallet += revenue
-			print("wallet value should've increased")
+			print(package.current_owner.wallet)
 			package.queue_free()

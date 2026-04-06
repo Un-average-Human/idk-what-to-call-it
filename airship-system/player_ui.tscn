@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c1fy7lbk6mdpc"]
+
+[ext_resource type="Script" uid="uid://c6x17jg65m2rl" path="res://player_ui.gd" id="1_lwipk"]
+
+[node name="Control" type="CanvasLayer" unique_id=143926657]
+script = ExtResource("1_lwipk")
+
+[node name="wallet" type="Label" parent="." unique_id=1191094125]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_top = -1.0
+offset_right = -118.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "moneh: 500"

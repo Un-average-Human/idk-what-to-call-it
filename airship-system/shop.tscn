@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bdbur4eiirwah"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rplqf"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_viryw"]
+
+[node name="shop_keep" type="StaticBody3D" unique_id=809839149]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1132844888]
+shape = SubResource("BoxShape3D_rplqf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1582362971]
+mesh = SubResource("CapsuleMesh_viryw")
+skeleton = NodePath("../..")
