@@ -1,10 +1,10 @@
 extends StaticBody3D
+var shipwright_popup_scene = preload("uid://dwonluj7neod2")
 
-var shop_ui = preload("uid://tbspm3kva16q").instantiate()
 @export var airships: Array[AirshipData]
 
-func _open_shop(player: CharacterBody3D):
-	print("function called")
-	shop_ui.player = player
-	shop_ui.airships = airships
-	player.add_child(shop_ui)
+func _opened_shop(player: CharacterBody3D):
+	var shipwright_popup = shipwright_popup_scene.instantiate()
+	shipwright_popup.player = player
+	shipwright_popup.airship_data = airships
+	player.add_child(shipwright_popup)

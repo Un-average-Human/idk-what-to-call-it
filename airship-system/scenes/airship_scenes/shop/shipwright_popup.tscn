@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dwonluj7neod2"]
+
+[ext_resource type="Script" uid="uid://bgtd1r4mcvyoy" path="res://scenes/airship_scenes/shop/shipwright_popup.gd" id="1_eovu0"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=608393999 node_paths=PackedStringArray("shop_button", "hangar_button", "close_button", "shipwright_name_label")]
+script = ExtResource("1_eovu0")
+shop_button = NodePath("Panel/shop_button")
+hangar_button = NodePath("Panel/hangar_button")
+close_button = NodePath("Panel/close_button")
+shipwright_name_label = NodePath("Panel/shipwright_name")
+
+[node name="Panel" type="Panel" parent="." unique_id=1101086839]
+offset_left = 229.33331
+offset_top = 129.0
+offset_right = 922.6667
+offset_bottom = 519.0
+
+[node name="shop_button" type="Button" parent="Panel" unique_id=1621365002]
+layout_mode = 0
+offset_left = 199.66669
+offset_top = 207.0
+offset_right = 493.6667
+offset_bottom = 282.0
+text = "Shop"
+
+[node name="hangar_button" type="Button" parent="Panel" unique_id=1727334263]
+layout_mode = 0
+offset_left = 199.66669
+offset_top = 298.0
+offset_right = 493.6667
+offset_bottom = 373.0
+text = "Hangar"
+
+[node name="close_button" type="Button" parent="Panel" unique_id=1727224243]
+layout_mode = 0
+offset_left = 602.6667
+offset_top = 22.0
+offset_right = 667.6667
+offset_bottom = 53.0
+text = "Close"
+
+[node name="shipwright_name" type="RichTextLabel" parent="Panel" unique_id=1798677149]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 22.0
+offset_right = 493.6667
+offset_bottom = 174.0
+text = "TEST SHIPWRIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1

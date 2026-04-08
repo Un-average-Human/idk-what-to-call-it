@@ -16,9 +16,6 @@ var selected_airship: AirshipData
 @export var airship_button_container: VBoxContainer
 var airship_button_group: ButtonGroup = ButtonGroup.new()
 
-var shipwright_popup: CanvasLayer
-@export var close_button: Button
-
 var airships: Array
 
 var player: CharacterBody3D
@@ -41,9 +38,7 @@ func _ready() -> void:
 	
 	description_panel_button.toggled.connect(_on_button_toggled.bind(description_panel_button))
 	airship_panel_button.toggled.connect(_on_button_toggled.bind(airship_panel_button))
-	purchase_button.pressed.connect(_on_airship_purchased_pressed)
-	close_button.pressed.connect(_close_shop)
-	
+	purchase_button.pressed.connect(_on_airship_spawn_pressed)
 
 func _on_button_toggled(toggled_on: bool, button: Button):
 	match button:
@@ -66,13 +61,13 @@ func _on_button_toggled(toggled_on: bool, button: Button):
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 				tween.tween_property(airships_to_buy, "global_position:x", 0.0, 1)
 
+
 func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button_data: AirshipData):
 	if toggled_on:
 		selected_airship = airship_button_data
 		speed_label.text = "Speed: " + str(airship_button_data.speed) + "KM/H"
 		capacity_label.text = "Capacity: " + str(airship_button_data.capacity) + "kg"
 		size_label.text = "Size: " + str(airship_button_data.size) + "m"
-		price_label.text = "Price: $" + str(airship_button_data.price)
 		description_label.text = str(airship_button_data.description)
 		
 		if player.owned_airships.has(airship_button_data.airship_name):
@@ -80,7 +75,7 @@ func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button
 		else:
 			purchase_button.disabled = false
 
-func _on_airship_purchased_pressed():
+func _on_airship_spawn_pressed():
 	if selected_airship == null:
 		return
 	print(selected_airship)
@@ -88,8 +83,3 @@ func _on_airship_purchased_pressed():
 		player.wallet -= selected_airship.price
 		player.owned_airships.append(selected_airship.airship_name)
 		purchase_button.disabled = true
-
-func _close_shop():
-	shipwright_popup.show()
-	shipwright_popup = null
-	self.queue_free()

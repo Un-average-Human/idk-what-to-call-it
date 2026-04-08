@@ -88,8 +88,8 @@ func _input(event: InputEvent) -> void:
 					if collider.has_method("_sell_package"):
 						collider._sell_package()
 				"shop":
-					if collider.has_method("_open_shop"):
-						collider._open_shop(self)
+					if collider.has_method("_opened_shop"):
+						collider._opened_shop(self)
 
 func _physics_process(delta: float) -> void:
 	#wont run if the player is piloting an airship or if they are seating

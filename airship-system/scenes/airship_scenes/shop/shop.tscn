@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bdbur4eiirwah"]
 
 [ext_resource type="Script" uid="uid://oapj2woij64c" path="res://scripts/airship_scripts/shop/shop.gd" id="1_viryw"]
+[ext_resource type="Script" uid="uid://p88se0qm47jt" path="res://scripts/airship_scripts/airship_data.gd" id="2_35pe4"]
 [ext_resource type="Resource" uid="uid://bhbpsmeh8dgy3" path="res://pigeon.tres" id="2_gjj8g"]
 [ext_resource type="Resource" uid="uid://coxdm3wq51p5w" path="res://mustrap.tres" id="3_cp4pr"]
 
@@ -12,7 +13,7 @@ size = Vector3(2, 2, 2)
 [node name="shop_keep" type="StaticBody3D" unique_id=809839149 groups=["shop"]]
 collision_mask = 3
 script = ExtResource("1_viryw")
-airships = [ExtResource("2_gjj8g"), ExtResource("3_cp4pr")]
+airships = Array[ExtResource("2_35pe4")]([ExtResource("3_cp4pr"), ExtResource("2_gjj8g")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1132844888]
 shape = SubResource("BoxShape3D_rplqf")
