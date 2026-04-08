@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ftya43t0ow8a"]
 
-[ext_resource type="Texture2D" uid="uid://doobvcpd7at1t" path="res://airships/airship_models/texture.jpg" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://doobvcpd7at1t" path="res://models/airship_models/texture.jpg" id="1_06t4h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfqs4"]
 

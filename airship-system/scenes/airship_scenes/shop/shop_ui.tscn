@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://tbspm3kva16q"]
+
+[ext_resource type="Script" uid="uid://cyis1pi2arslc" path="res://scripts/airship_scripts/shop/shop_ui.gd" id="1_hclne"]
+
+[sub_resource type="Theme" id="Theme_fscwk"]
+
+[node name="shop" type="Control" unique_id=952737937 node_paths=PackedStringArray("description_panel_button", "description_panel", "description_label", "speed_label", "capacity_label", "size_label", "price_label", "purchase_button", "airship_panel_button", "airships_to_buy", "airship_button_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hclne")
+description_panel_button = NodePath("CanvasLayer/description/description_panel_button")
+description_panel = NodePath("CanvasLayer/description")
+description_label = NodePath("CanvasLayer/description/Panel/MarginContainer/VBoxContainer/description_label")
+speed_label = NodePath("CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer/speed")
+capacity_label = NodePath("CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer/capacity")
+size_label = NodePath("CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer/size")
+price_label = NodePath("CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer/price")
+purchase_button = NodePath("CanvasLayer/description/Panel/MarginContainer/VBoxContainer/purchase_button")
+airship_panel_button = NodePath("CanvasLayer/airships/airship_panel_button")
+airships_to_buy = NodePath("CanvasLayer/airships")
+airship_button_container = NodePath("CanvasLayer/airships/Panel/ScrollContainer/VBoxContainer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=553194051]
+
+[node name="airships" type="HBoxContainer" parent="CanvasLayer" unique_id=210104856]
+custom_minimum_size = Vector2(230, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -922.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/airships" unique_id=182719510]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/airships/Panel" unique_id=989328384]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/airships/Panel/ScrollContainer" unique_id=14416579]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme = SubResource("Theme_fscwk")
+
+[node name="airship_panel_button" type="Button" parent="CanvasLayer/airships" unique_id=126620323]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+toggle_mode = true
+
+[node name="description" type="VBoxContainer" parent="CanvasLayer" unique_id=271536231]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.0
+offset_top = 418.0
+offset_right = -136.0
+offset_bottom = 0.0013427734
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="description_panel_button" type="Button" parent="CanvasLayer/description" unique_id=1018881549]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+toggle_mode = true
+
+[node name="Panel" type="Panel" parent="CanvasLayer/description" unique_id=401972038]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/description/Panel" unique_id=719990717]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/description/Panel/MarginContainer" unique_id=2073738800]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/description/Panel/MarginContainer/VBoxContainer" unique_id=405600080]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="speed" type="RichTextLabel" parent="CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1268866180]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="capacity" type="RichTextLabel" parent="CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2028106681]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="size" type="RichTextLabel" parent="CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=577264956]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="price" type="RichTextLabel" parent="CanvasLayer/description/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=990429789]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="description_label" type="RichTextLabel" parent="CanvasLayer/description/Panel/MarginContainer/VBoxContainer" unique_id=756308105]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="purchase_button" type="Button" parent="CanvasLayer/description/Panel/MarginContainer/VBoxContainer" unique_id=917898184]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PURCHASE"
+
+[node name="Panel" type="Panel" parent="." unique_id=316174555]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

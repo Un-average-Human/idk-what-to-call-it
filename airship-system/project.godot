@@ -30,13 +30,14 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res:/
 [file_customization]
 
 folder_colors={
-"res://airships/": "red",
-"res://airships/airship_models/": "red",
-"res://airships/airship_scenes/": "red",
-"res://airships/scripts/": "red",
-"res://delivery/": "teal",
-"res://others/": "purple",
-"res://player/": "blue"
+"res://models/": "red",
+"res://models/airship_models/": "red",
+"res://player/": "blue",
+"res://scenes/": "green",
+"res://scripts/": "orange",
+"res://scripts/airship_scripts/": "orange",
+"res://scripts/delivery_scripts/": "orange",
+"res://scripts/others/": "orange"
 }
 
 [global_group]
@@ -45,6 +46,7 @@ pilot_seat=""
 buy_package=""
 grabbable=""
 sell_package=""
+shop=""
 
 [input]
 
