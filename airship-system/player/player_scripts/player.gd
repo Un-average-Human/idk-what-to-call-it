@@ -22,12 +22,14 @@ var is_seating := false
 #movement variables
 var SPEED := 5.0
 const JUMP_VELOCITY = 5
+var camera_enabled: bool = true
 
 # money
 var wallet: float = 500.0: set = _set_wallet
 
 #airships
-var owned_airships: Array = []
+var owned_airships: Array[AirshipData]
+var airship_spawned: RigidBody3D
 
 #main functions
 func _ready() -> void:
@@ -39,7 +41,7 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	elif Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and camera_enabled == true:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			rotate_y(-event.relative.x * SENSITIVITY)
 			player_camera.rotate_x(-event.relative.y * SENSITIVITY)
@@ -89,6 +91,8 @@ func _input(event: InputEvent) -> void:
 						collider._sell_package()
 				"shop":
 					if collider.has_method("_opened_shop"):
+						set_physics_process(false)
+						camera_enabled = false
 						collider._opened_shop(self)
 
 func _physics_process(delta: float) -> void:
@@ -133,6 +137,7 @@ func _pilot_airship(target_airship):
 		global_transform = target_airship.global_transform
 		reparent(target_airship)
 		target_airship.get_parent().player_driving = self
+		target_airship.get_parent().get_node("camera_arm").get_child(0).make_current()
 		
 	elif is_piloting == true:
 		is_piloting = false
@@ -141,6 +146,7 @@ func _pilot_airship(target_airship):
 		reparent(get_tree().root)
 		var current_y = global_rotation.y
 		global_rotation = Vector3(0, current_y, 0)
+		player_camera.make_current()
 func _sit(target_seat):
 	pass
 

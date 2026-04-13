@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipwrightData" format=3 uid="uid://cnsiohhchw71u"]
+
+[ext_resource type="Script" uid="uid://p88se0qm47jt" path="res://scripts/resources/airship_data.gd" id="1_gqf8t"]
+[ext_resource type="Resource" uid="uid://bhbpsmeh8dgy3" path="res://resources/airships/pigeon.tres" id="2_3dywr"]
+[ext_resource type="Script" uid="uid://dyojf6hn2gwnh" path="res://scripts/resources/shipwright_data.gd" id="2_lrv1e"]
+
+[resource]
+script = ExtResource("2_lrv1e")
+shipwright_name = "Gagston's Flying Machines"
+shipwright_seller = "Timothy Glagston"
+max_docks = 3
+airships_available = Array[ExtResource("1_gqf8t")]([ExtResource("2_3dywr")])
+metadata/_custom_type_script = "uid://dyojf6hn2gwnh"

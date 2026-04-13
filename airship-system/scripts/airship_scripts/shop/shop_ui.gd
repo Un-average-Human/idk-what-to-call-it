@@ -7,21 +7,18 @@ extends CanvasLayer
 @export var capacity_label: RichTextLabel
 @export var size_label: RichTextLabel
 @export var price_label: RichTextLabel
-
 @export var purchase_button: Button
 var selected_airship: AirshipData
-
 @export var airship_panel_button: Button
 @export var airships_to_buy: HBoxContainer
 @export var airship_button_container: VBoxContainer
 var airship_button_group: ButtonGroup = ButtonGroup.new()
-
 var shipwright_popup: CanvasLayer
 @export var close_button: Button
-
 var airships: Array
-
 var player: CharacterBody3D
+@export var airship_preview_marker: Marker3D
+var airship_preview: RigidBody3D
 
 func _ready() -> void:
 	#orders the airships by price, with the cheapest one coming up first
@@ -38,6 +35,7 @@ func _ready() -> void:
 		airship_button.toggled.connect(_on_airship_button_toggled.bind(airship_button, airship_data))
 	
 	airship_button_container.get_child(0).toggled.emit(true)
+	airship_button_container.get_child(0).button_pressed = true
 	
 	description_panel_button.toggled.connect(_on_button_toggled.bind(description_panel_button))
 	airship_panel_button.toggled.connect(_on_button_toggled.bind(airship_panel_button))
@@ -68,14 +66,35 @@ func _on_button_toggled(toggled_on: bool, button: Button):
 
 func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button_data: AirshipData):
 	if toggled_on:
+		var root = player.get_tree().root
 		selected_airship = airship_button_data
+		airship_preview = selected_airship.airships_scene.instantiate()
+		
+		airship_preview.is_preview = true
+		airship_preview.freeze = true
+		for collision_shape in airship_preview.get_children():
+			if collision_shape is CollisionShape3D:
+				collision_shape.queue_free()
+		
+		airship_preview.is_preview = true
+		root.add_child(airship_preview)
+		airship_preview.global_position = airship_preview_marker.global_position
+		var camera_arm = airship_preview.get_node("camera_arm")
+		camera_arm.global_position = airship_preview.global_position
+		camera_arm.clear_excluded_objects()
+		camera_arm.add_excluded_object(airship_preview)
+		camera_arm.force_update_transform()
+		camera_arm.get_child(0).make_current()
+		
+		airship_preview.player_driving = player
+		
 		speed_label.text = "Speed: " + str(airship_button_data.speed) + "KM/H"
 		capacity_label.text = "Capacity: " + str(airship_button_data.capacity) + "kg"
 		size_label.text = "Size: " + str(airship_button_data.size) + "m"
 		price_label.text = "Price: $" + str(airship_button_data.price)
 		description_label.text = str(airship_button_data.description)
 		
-		if player.owned_airships.has(airship_button_data.airship_name):
+		if player.owned_airships.has(airship_button_data):
 			purchase_button.disabled = true
 		else:
 			purchase_button.disabled = false
@@ -83,13 +102,14 @@ func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button
 func _on_airship_purchased_pressed():
 	if selected_airship == null:
 		return
-	print(selected_airship)
 	if player.wallet >= selected_airship.price:
 		player.wallet -= selected_airship.price
-		player.owned_airships.append(selected_airship.airship_name)
+		player.owned_airships.append(selected_airship)
 		purchase_button.disabled = true
 
 func _close_shop():
+	airship_preview.queue_free()
 	shipwright_popup.show()
 	shipwright_popup = null
+	player.player_camera.make_current()
 	self.queue_free()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dwonluj7neod2"]
 
-[ext_resource type="Script" uid="uid://bgtd1r4mcvyoy" path="res://scenes/airship_scenes/shop/shipwright_popup.gd" id="1_eovu0"]
+[ext_resource type="Script" uid="uid://bgtd1r4mcvyoy" path="res://scripts/airship_scripts/shop/shipwright_popup.gd" id="1_eovu0"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=608393999 node_paths=PackedStringArray("shop_button", "hangar_button", "close_button", "shipwright_name_label")]
 script = ExtResource("1_eovu0")
@@ -41,10 +41,11 @@ text = "Close"
 
 [node name="shipwright_name" type="RichTextLabel" parent="Panel" unique_id=1798677149]
 layout_mode = 0
-offset_left = 200.0
+offset_left = 147.0
 offset_top = 22.0
-offset_right = 493.6667
+offset_right = 546.6667
 offset_bottom = 174.0
+theme_override_font_sizes/normal_font_size = 40
 text = "TEST SHIPWRIGHT"
 horizontal_alignment = 1
 vertical_alignment = 1

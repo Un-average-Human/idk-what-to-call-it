@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AirshipData" format=3 uid="uid://coxdm3wq51p5w"]
+
+[ext_resource type="PackedScene" uid="uid://ftya43t0ow8a" path="res://main_menu.tscn" id="1_d31pv"]
+[ext_resource type="Script" uid="uid://p88se0qm47jt" path="res://scripts/resources/airship_data.gd" id="1_tgp1v"]
+
+[resource]
+script = ExtResource("1_tgp1v")
+airship_name = "Mustrap"
+speed = 15
+price = 100000
+size = 100
+description = "The Mustrap was originally a wrecked galleon found wandering through the ocean by itself, wandering aimlessly without a crew before running aground. It was later found, repaired and modified to be able to soar the skies with grace."
+airships_scene = ExtResource("1_d31pv")
+metadata/_custom_type_script = "uid://p88se0qm47jt"

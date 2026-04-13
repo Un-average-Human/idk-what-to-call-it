@@ -1119,7 +1119,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_31jya")
 
-[node name="balloon" type="RigidBody3D" unique_id=726071326 node_paths=PackedStringArray("helm", "rudder", "propellers")]
+[node name="balloon" type="RigidBody3D" unique_id=726071326 node_paths=PackedStringArray("helm", "rudder", "propellers", "camera_arm")]
 mass = 300.0
 can_sleep = false
 angular_damp = 1.0
@@ -1136,6 +1136,9 @@ max_lift = 4000.0
 lift_increment = 100.0
 max_speed = 2.778
 speed_increment = 0.278
+camera_arm = NodePath("camera_arm")
+max_zoom_out = 128
+max_zoom_in = 12
 
 [node name="CollisionShape3D15" type="CollisionShape3D" parent="." unique_id=664207796]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -1443,3 +1446,8 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48802, 0.0113663, 0)
 mesh = SubResource("ArrayMesh_0hxnv")
 skeleton = NodePath("")
+
+[node name="camera_arm" type="SpringArm3D" parent="." unique_id=139999112]
+spring_length = 20.0
+
+[node name="Camera3D" type="Camera3D" parent="camera_arm" unique_id=568131455]

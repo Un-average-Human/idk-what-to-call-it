@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://d15rnpjif8qxh"]
 
-[ext_resource type="PackedScene" uid="uid://b6bbbluqw1jrs" path="res://scenes/airship_scenes/pigeon.tscn" id="2_6uqi0"]
 [ext_resource type="PackedScene" uid="uid://co6ldalc12ob8" path="res://player/player_scene/player.tscn" id="2_8uh7m"]
 [ext_resource type="PackedScene" uid="uid://bkcvgsgnv0pc" path="res://scenes/delivery_scenes/package_ordering.tscn" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://bdbur4eiirwah" path="res://scenes/airship_scenes/shop/shop.tscn" id="4_ykrsh"]
@@ -37,11 +36,10 @@ material = SubResource("StandardMaterial3D_37kl0")
 
 [node name="CharacterBody3D" parent="." unique_id=1113979859 instance=ExtResource("2_8uh7m")]
 
-[node name="pigeon" parent="." unique_id=257643289 instance=ExtResource("2_6uqi0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8928473, -0.34335768, 0.49208975)
-
 [node name="StaticBody3D" parent="." unique_id=737200113 groups=["buy_package"] instance=ExtResource("4_ppyta")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1889715, -0.9467964, 12.550621)
 
 [node name="shop_keep" parent="." unique_id=809839149 instance=ExtResource("4_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 5)
+
+[node name="spawn" type="Marker3D" parent="." unique_id=1115729900]

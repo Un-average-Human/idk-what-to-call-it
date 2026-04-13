@@ -4,7 +4,27 @@
 
 [sub_resource type="Theme" id="Theme_fscwk"]
 
-[node name="shop" type="CanvasLayer" unique_id=639485984 node_paths=PackedStringArray("description_panel_button", "description_panel", "description_label", "speed_label", "capacity_label", "size_label", "price_label", "purchase_button", "airship_panel_button", "airships_to_buy", "airship_button_container", "close_button")]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uiogg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_hclne"]
+sky_material = SubResource("ProceduralSkyMaterial_uiogg")
+
+[sub_resource type="Environment" id="Environment_2b0t6"]
+background_mode = 2
+sky = SubResource("Sky_hclne")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_hclne"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uiogg"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="shop" type="CanvasLayer" unique_id=639485984 node_paths=PackedStringArray("description_panel_button", "description_panel", "description_label", "speed_label", "capacity_label", "size_label", "price_label", "purchase_button", "airship_panel_button", "airships_to_buy", "airship_button_container", "close_button", "airship_preview_marker")]
 script = ExtResource("1_hclne")
 description_panel_button = NodePath("description/description_panel_button")
 description_panel = NodePath("description")
@@ -18,13 +38,16 @@ airship_panel_button = NodePath("airships/airship_panel_button")
 airships_to_buy = NodePath("airships")
 airship_button_container = NodePath("airships/Panel/ScrollContainer/VBoxContainer")
 close_button = NodePath("close_button")
+airship_preview_marker = NodePath("Node3D/MeshInstance3D/Marker3D")
 
 [node name="Panel" type="Panel" parent="." unique_id=316174555]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="airships" type="HBoxContainer" parent="." unique_id=210104856]
 custom_minimum_size = Vector2(230, 0)
@@ -35,6 +58,7 @@ offset_right = -922.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="airships" unique_id=182719510]
 layout_mode = 2
@@ -71,6 +95,7 @@ offset_bottom = 0.0013427734
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="description_panel_button" type="Button" parent="description" unique_id=1018881549]
 custom_minimum_size = Vector2(0, 30)
@@ -145,3 +170,67 @@ offset_left = 1087.0
 offset_right = 1152.0
 offset_bottom = 31.0
 text = "Close"
+metadata/_edit_use_anchors_ = true
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1552450727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D" unique_id=969357011]
+environment = SubResource("Environment_2b0t6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1663773226]
+transform = Transform3D(250, 0, 0, 0, 250, 0, 0, 0, 250, 0, 0, 0)
+mesh = SubResource("SphereMesh_hclne")
+skeleton = NodePath("../shop")
+surface_material_override/0 = SubResource("StandardMaterial3D_uiogg")
+
+[node name="Marker3D" type="Marker3D" parent="Node3D/MeshInstance3D" unique_id=393589458]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/MeshInstance3D" unique_id=1604668381]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 1)
+light_energy = 1.815
+spot_range = 215.28696
+spot_attenuation = 0.0
+spot_angle = 17.16
+spot_angle_attenuation = 1e-05
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Node3D/MeshInstance3D" unique_id=252932771]
+transform = Transform3D(-0.005, 0, -4.3711387e-10, 0, 0.005, 0, 4.3711387e-10, 0, -0.005, 0, 0, -1)
+light_energy = 1.815
+spot_range = 215.28696
+spot_attenuation = 0.0
+spot_angle = 17.16
+spot_angle_attenuation = 1e-05
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Node3D/MeshInstance3D" unique_id=221537745]
+transform = Transform3D(-1.7484554e-10, 0, -0.0039999997, 0, 0.0039999997, 0, 0.0039999997, 0, -1.7484554e-10, -0.99999994, 0, -4.3711385e-08)
+light_energy = 1.815
+spot_range = 215.28696
+spot_attenuation = 0.0
+spot_angle = 17.16
+spot_angle_attenuation = 1e-05
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Node3D/MeshInstance3D" unique_id=1491203916]
+transform = Transform3D(-1.7484558e-10, 0, 0.0039999997, 0, 0.0039999997, 0, -0.0039999997, 0, -1.7484558e-10, 0.99999994, 0, 4.3711385e-08)
+light_energy = 1.815
+spot_range = 215.28696
+spot_attenuation = 0.0
+spot_angle = 17.16
+spot_angle_attenuation = 1e-05
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Node3D/MeshInstance3D" unique_id=1363139153]
+transform = Transform3D(-0.005, 0, -4.371139e-10, -4.371139e-10, -2.1855694e-10, 0.005, -1.9106855e-17, 0.005, 2.1855694e-10, 0, 1, 0)
+light_energy = 1.815
+spot_range = 215.28696
+spot_attenuation = 0.0
+spot_angle = 17.16
+spot_angle_attenuation = 1e-05
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Node3D/MeshInstance3D" unique_id=1384956395]
+transform = Transform3D(-0.005, 2.7105054e-24, -4.3711387e-10, 4.3711387e-10, 6.556708e-10, -0.005, 5.732056e-17, -0.005, -6.556708e-10, 0, -1, 0)
+light_energy = 1.815
+spot_range = 215.28696
+spot_attenuation = 0.0
+spot_angle = 17.16
+spot_angle_attenuation = 1e-05

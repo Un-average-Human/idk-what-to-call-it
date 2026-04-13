@@ -24,28 +24,49 @@ var current_speed := 0.0
 @export var speed_increment: float
 
 var player_driving: CharacterBody3D
+@export var camera_arm: SpringArm3D
+@export var max_zoom_out: int
+@export var max_zoom_in: int
+var is_preview: bool = false
 
 func _ready() -> void:
+	camera_arm.top_level = true
 	current_lift = min_lift
 
 func _input(event: InputEvent) -> void:
 	if player_driving == null:
 		return
-	if Input.is_action_just_pressed("W") and current_speed < max_speed:
-		current_speed += speed_increment
-	if Input.is_action_just_pressed("S") and current_speed > -max_speed:
-		current_speed -= speed_increment
-	if Input.is_action_just_pressed("Q") and current_lift < max_lift:
-		current_lift += lift_increment
-	if Input.is_action_just_pressed("Z") and current_lift > min_lift:
-		current_lift -= lift_increment
-	if Input.is_action_just_pressed("X"):
-		current_speed = 0
+	if !is_preview:
+		if Input.is_action_just_pressed("W") and current_speed < max_speed:
+			current_speed += speed_increment
+		if Input.is_action_just_pressed("S") and current_speed > -max_speed:
+			current_speed -= speed_increment
+		if Input.is_action_just_pressed("Q") and current_lift < max_lift:
+			current_lift += lift_increment
+		if Input.is_action_just_pressed("Z") and current_lift > min_lift:
+			current_lift -= lift_increment
+		if Input.is_action_just_pressed("X"):
+			current_speed = 0
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		camera_arm.add_excluded_object(self)
+		var sens = player_driving.SENSITIVITY
+		camera_arm.rotation.y -= event.relative.x * sens
+		
+		camera_arm.rotation.x -= event.relative.y * sens
+		camera_arm.rotation.x = clamp(camera_arm.rotation.x, -PI/2, PI/4)
+	
+	if Input.is_action_just_pressed("WheelUp") and camera_arm.spring_length > max_zoom_in:
+		camera_arm.spring_length -= 1
+	elif Input.is_action_just_pressed("WheelDown") and camera_arm.spring_length < max_zoom_out:
+		camera_arm.spring_length += 1
 
 func _physics_process(delta: float) -> void:
 	
+	#making the camera arm follow the airship
+	camera_arm.global_position = lerp(camera_arm.global_position, global_position, delta * 6)
+	
 #boring steering stuff
-	if player_driving != null:
+	if player_driving != null and is_preview == false:
 		steering_input = Input.get_action_strength("A") - Input.get_action_strength("D")
 	else:
 		steering_input = 0
