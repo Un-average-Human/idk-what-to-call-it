@@ -10,4 +10,4 @@ func _buy_package(player: CharacterBody3D):
 		package_instance.mass = package_instance.weight
 		package_instance.global_position = package_spawn_pos.global_position
 		player.wallet -= package_instance.base_price
-		package_instance.current_owner = player
+		package_instance.original_owner = player

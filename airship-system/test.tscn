@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d15rnpjif8qxh"]
 
 [ext_resource type="PackedScene" uid="uid://co6ldalc12ob8" path="res://player/player_scene/player.tscn" id="2_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://b6bbbluqw1jrs" path="res://scenes/airship_scenes/pigeon.tscn" id="4_g14j6"]
 [ext_resource type="PackedScene" uid="uid://bkcvgsgnv0pc" path="res://scenes/delivery_scenes/package_ordering.tscn" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://bdbur4eiirwah" path="res://scenes/airship_scenes/shop/shop.tscn" id="4_ykrsh"]
 
@@ -43,3 +44,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1889715, -0.9467964, 12.55
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 5)
 
 [node name="spawn" type="Marker3D" parent="." unique_id=1115729900]
+
+[node name="balloon" parent="." unique_id=1545166384 instance=ExtResource("4_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16052723, -0.06461197, -3.914108)

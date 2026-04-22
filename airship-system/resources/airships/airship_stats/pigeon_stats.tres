@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AirshipStats" format=3 uid="uid://byg4djnv3tfi5"]
+
+[ext_resource type="Script" uid="uid://b2os2lpoqv0dv" path="res://scripts/resources/airship_stats.gd" id="1_isw7e"]
+
+[resource]
+script = ExtResource("1_isw7e")
+helm_max_rotation = 120.0
+rudder_max_rotation = 45.0
+propeller_rotating_speed = 8.0
+turn_power = 2.0
+tilt_angle = 15.0
+min_lift = 2740.0
+max_lift = 3240.0
+lift_increment = 100.0
+max_speed = 2.778
+speed_increment = 0.278
+metadata/_custom_type_script = "uid://b2os2lpoqv0dv"

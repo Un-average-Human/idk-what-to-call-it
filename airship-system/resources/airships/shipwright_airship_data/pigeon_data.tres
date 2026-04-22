@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AirshipData" format=3 uid="uid://bhbpsmeh8dgy3"]
+
+[ext_resource type="PackedScene" uid="uid://b6bbbluqw1jrs" path="res://scenes/airship_scenes/pigeon.tscn" id="1_0lmv6"]
+[ext_resource type="Script" uid="uid://p88se0qm47jt" path="res://scripts/resources/airship_data.gd" id="2_shcrh"]
+
+[resource]
+script = ExtResource("2_shcrh")
+airship_name = "Pigeon"
+speed = 10
+price = 200
+capacity = 300
+size = 5
+description = "The Pigeon is the cheapest airship available. It's low price allows for starter merchants to take to the skies with ease."
+airships_scene = ExtResource("1_0lmv6")
+metadata/_custom_type_script = "uid://p88se0qm47jt"

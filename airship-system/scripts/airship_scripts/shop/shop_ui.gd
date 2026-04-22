@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+#SHOP
 @export var description_panel_button: Button
 @export var description_panel: VBoxContainer
 @export var description_label: RichTextLabel
@@ -8,6 +8,7 @@ extends CanvasLayer
 @export var size_label: RichTextLabel
 @export var price_label: RichTextLabel
 @export var purchase_button: Button
+
 var selected_airship: AirshipData
 @export var airship_panel_button: Button
 @export var airships_to_buy: HBoxContainer
@@ -15,10 +16,16 @@ var selected_airship: AirshipData
 var airship_button_group: ButtonGroup = ButtonGroup.new()
 var shipwright_popup: CanvasLayer
 @export var close_button: Button
+
 var airships: Array
+
 var player: CharacterBody3D
+
 @export var airship_preview_marker: Marker3D
 var airship_preview: RigidBody3D
+
+var description_panel_open = false
+var airship_panel_open = false
 
 func _ready() -> void:
 	#orders the airships by price, with the cheapest one coming up first
@@ -37,35 +44,41 @@ func _ready() -> void:
 	airship_button_container.get_child(0).toggled.emit(true)
 	airship_button_container.get_child(0).button_pressed = true
 	
-	description_panel_button.toggled.connect(_on_button_toggled.bind(description_panel_button))
-	airship_panel_button.toggled.connect(_on_button_toggled.bind(airship_panel_button))
+	description_panel_button.pressed.connect(_on_hide_panel_button_pressed.bind(description_panel_button))
+	airship_panel_button.pressed.connect(_on_hide_panel_button_pressed.bind(airship_panel_button))
 	purchase_button.pressed.connect(_on_airship_purchased_pressed)
 	close_button.pressed.connect(_close_shop)
 	
 
-func _on_button_toggled(toggled_on: bool, button: Button):
+func _on_hide_panel_button_pressed(button: Button):
 	match button:
 		description_panel_button:
-			if toggled_on:
+			if !description_panel_open:
+				description_panel_open = true
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 				tween.tween_property(description_panel, "global_position:y", 618.0, 1)
-			else:
+			elif description_panel_open:
+				description_panel_open = false
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 				tween.tween_property(description_panel, "global_position:y", 418.0, 1)
 		airship_panel_button:
-			if toggled_on:
+			if !airship_panel_open:
+				airship_panel_open = true
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 				tween.tween_property(airships_to_buy, "global_position:x", -200.0, 1)
-			else:
+			elif airship_panel_open:
+				airship_panel_open = false
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 				tween.tween_property(airships_to_buy, "global_position:x", 0.0, 1)
 
 func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button_data: AirshipData):
 	if toggled_on:
+		if airship_preview != null:
+			airship_preview.queue_free()
 		var root = player.get_tree().root
 		selected_airship = airship_button_data
 		airship_preview = selected_airship.airships_scene.instantiate()
@@ -83,7 +96,6 @@ func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button
 		camera_arm.global_position = airship_preview.global_position
 		camera_arm.clear_excluded_objects()
 		camera_arm.add_excluded_object(airship_preview)
-		camera_arm.force_update_transform()
 		camera_arm.get_child(0).make_current()
 		
 		airship_preview.player_driving = player
@@ -109,6 +121,7 @@ func _on_airship_purchased_pressed():
 
 func _close_shop():
 	airship_preview.queue_free()
+	airship_preview = null
 	shipwright_popup.show()
 	shipwright_popup = null
 	player.player_camera.make_current()

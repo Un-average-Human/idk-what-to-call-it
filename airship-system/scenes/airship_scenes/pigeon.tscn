@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://b6bbbluqw1jrs"]
 
 [ext_resource type="Script" uid="uid://c52d8seuhl47o" path="res://scripts/airship_scripts/blimp_body.gd" id="1_cm3st"]
+[ext_resource type="Resource" uid="uid://byg4djnv3tfi5" path="res://resources/airships/airship_stats/pigeon_stats.tres" id="2_e23kk"]
+[ext_resource type="Script" uid="uid://0dof8jt1dy8d" path="res://scenes/airship_scenes/camera_arm.gd" id="2_ggfwy"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cm3st"]
 points = PackedVector3Array(-0.075677395, 0.31190234, 0.8855568, 2.2235022, 0.86375946, 0.8855568, 2.2235022, 0.86375946, 0.7935356, -0.075677395, 0.86375946, 1.0694642, 1.671438, 0.31190234, 1.0694642, 2.131229, 0.31190234, 0.7935356, -0.075677395, 0.86375946, 0.8855568, 1.7632611, 0.86375946, 1.0694642, -0.075677395, 0.31190234, 1.0694642, 1.4873416, 0.49594474, 0.7935356, 2.2235022, 0.5878309, 0.8855568, 1.5793898, 0.86375946, 0.7935356, 2.131229, 0.31190234, 0.8855568, 1.4873416, 0.31190234, 0.7935356, 1.7632611, 0.67971706, 1.0694642, 2.2235022, 0.5878309, 0.7935356)
@@ -1124,21 +1126,12 @@ mass = 300.0
 can_sleep = false
 angular_damp = 1.0
 script = ExtResource("1_cm3st")
+airship = ExtResource("2_e23kk")
 helm = NodePath("helm")
 rudder = NodePath("rudder")
-rudder_max_rotation = 45.0
 propellers = [NodePath("right_propeller"), NodePath("left_propeller")]
 propeller_rotating_speed = 8.0
-turn_power = 4.0
-tilt_angle = 15.0
-min_lift = 2500.0
-max_lift = 4000.0
-lift_increment = 100.0
-max_speed = 2.778
-speed_increment = 0.278
 camera_arm = NodePath("camera_arm")
-max_zoom_out = 128
-max_zoom_in = 12
 
 [node name="CollisionShape3D15" type="CollisionShape3D" parent="." unique_id=664207796]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -1447,7 +1440,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48802, 0.0113663, 0)
 mesh = SubResource("ArrayMesh_0hxnv")
 skeleton = NodePath("")
 
-[node name="camera_arm" type="SpringArm3D" parent="." unique_id=139999112]
+[node name="camera_arm" type="SpringArm3D" parent="." unique_id=139999112 node_paths=PackedStringArray("airship")]
+transform = Transform3D(-0.70710677, -0.35355338, 0.6123724, 0, 0.8660254, 0.5, -0.70710677, 0.35355338, -0.6123724, 0, 0, 0)
 spring_length = 20.0
+script = ExtResource("2_ggfwy")
+airship = NodePath("..")
+max_zoom_out = 120
+max_zoom_in = 12
 
 [node name="Camera3D" type="Camera3D" parent="camera_arm" unique_id=568131455]

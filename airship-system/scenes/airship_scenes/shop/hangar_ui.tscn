@@ -89,7 +89,6 @@ theme = SubResource("Theme_7trcf")
 [node name="airship_panel_button" type="Button" parent="hangar/airships" unique_id=727639638]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-toggle_mode = true
 
 [node name="description" type="VBoxContainer" parent="hangar" unique_id=1621791706]
 layout_mode = 1
@@ -107,7 +106,6 @@ theme_override_constants/separation = 0
 [node name="description_panel_button" type="Button" parent="hangar/description" unique_id=229829001]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-toggle_mode = true
 
 [node name="Panel" type="Panel" parent="hangar/description" unique_id=296369975]
 layout_mode = 2

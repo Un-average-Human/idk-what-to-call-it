@@ -39,4 +39,5 @@ func _open_hangar():
 func _close_popup():
 	player.set_physics_process(true)
 	player.camera_enabled = true
+	player.is_shop_open = false
 	self.queue_free()

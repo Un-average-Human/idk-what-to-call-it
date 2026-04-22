@@ -37,11 +37,15 @@ var player: CharacterBody3D
 
 var docks_available: Array[Marker3D]
 var dock_index: int = 0
-var dock_camera_rotation: Vector3
+var dock_camera_rotation: Vector3 = Vector3.ZERO
+var dock_camera_zoom: float
 var airship_preview: RigidBody3D
 
+var description_panel_open = false
+var airship_panel_open = false
+
+
 func _ready() -> void:
-	#HANGAR GUI
 	#orders the airships by price, with the cheapest one coming up first
 	airships.sort()
 	
@@ -55,40 +59,50 @@ func _ready() -> void:
 		airship_button_container.add_child(airship_button)
 		airship_button.toggled.connect(_on_airship_button_toggled.bind(airship_button, airship_data))
 	
+	#selects the first button if there is an airship, otherwise it'll just use
+	#default camera for the hangar
 	if airship_button_container.get_child_count() > 0:
 		airship_button_container.get_child(0).toggled.emit(true)
 		airship_button_container.get_child(0).button_pressed = true
 	else:
 		empty_hangar_cam.make_current()
 	
-	description_panel_button.toggled.connect(_on_button_toggled.bind(description_panel_button))
-	airship_panel_button.toggled.connect(_on_button_toggled.bind(airship_panel_button))
+	#binds the signals to their respective functions
+	description_panel_button.pressed.connect(_on_hide_panel_button_pressed.bind(description_panel_button))
+	airship_panel_button.pressed.connect(_on_hide_panel_button_pressed.bind(airship_panel_button))
 	close_button.pressed.connect(_close_shop)
 	
-	#DOCKS GUI
 	airship_spawn_button.pressed.connect(_on_airship_spawn_pressed)
 	back_to_hangar_button.pressed.connect(_on_back_to_hangar_pressed)
 	go_to_docks_button.pressed.connect(_on_go_to_dock_pressed)
 	previous_dock_button.pressed.connect(_select_dock.bind("previous"))
 	next_dock_button.pressed.connect(_select_dock.bind("next"))
 
-func _on_button_toggled(toggled_on: bool, button: Button):
+func _on_hide_panel_button_pressed(button: Button):
 	match button:
 		description_panel_button:
-			if toggled_on:
+			#open the description panel
+			if !description_panel_open:
+				description_panel_open = true
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 				tween.tween_property(description_panel, "global_position:y", 618.0, 1)
-			else:
+			elif description_panel_open:
+				#closes the description panel
+				description_panel_open = false
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 				tween.tween_property(description_panel, "global_position:y", 418.0, 1)
 		airship_panel_button:
-			if toggled_on:
+			if !airship_panel_open:
+				#opens the airship panel
+				airship_panel_open = true
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 				tween.tween_property(airships_to_spawn, "global_position:x", -200.0, 1)
-			else:
+			elif airship_panel_open:
+				#closes the airship panel
+				airship_panel_open = false
 				var tween = create_tween()
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 				tween.tween_property(airships_to_spawn, "global_position:x", 0.0, 1)
@@ -146,9 +160,10 @@ func _select_dock(button_func: String):
 	if selected_airship == null:
 		return
 	if airship_preview != null:
-		var previous_camera_arm = airship_preview.get_node_or_null("camera_arm")
+		var previous_camera_arm: SpringArm3D = airship_preview.get_node_or_null("camera_arm")
 		if previous_camera_arm:
 			dock_camera_rotation = previous_camera_arm.global_rotation
+			dock_camera_zoom = previous_camera_arm.spring_length
 			airship_preview.queue_free()
 	airship_preview = selected_airship.airships_scene.instantiate()
 	airship_preview.is_preview = true
@@ -173,9 +188,12 @@ func _select_dock(button_func: String):
 		_:
 			dock_index = 0
 	var camera_arm: SpringArm3D = airship_preview.get_node("camera_arm")
-	airship_preview.global_position = docks_available[dock_index].global_position
+	if dock_camera_rotation != Vector3.ZERO:
+		camera_arm.global_rotation = dock_camera_rotation
+	if dock_camera_zoom != 0:
+		camera_arm.spring_length = dock_camera_zoom
 	
-	camera_arm.global_rotation = dock_camera_rotation
+	airship_preview.global_position = docks_available[dock_index].global_position
 	#reddit magic, idk how this stops the camera from flickering
 	camera_arm.global_position = airship_preview.global_position
 	camera_arm.clear_excluded_objects()

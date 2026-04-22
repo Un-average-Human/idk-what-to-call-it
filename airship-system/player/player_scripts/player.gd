@@ -31,6 +31,9 @@ var wallet: float = 500.0: set = _set_wallet
 var owned_airships: Array[AirshipData]
 var airship_spawned: RigidBody3D
 
+#shop
+var is_shop_open: bool = false: set = _mouse_mode_manager
+
 #main functions
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -63,8 +66,9 @@ func _input(event: InputEvent) -> void:
 		if right_grabbed_obj == null:
 			if interact_ray.is_colliding():
 				var collider = interact_ray.get_collider()
-				add_collision_exception_with(collider)
-				right_grabbed_obj = collider
+				if collider.is_in_group("grabbable"):
+					add_collision_exception_with(collider)
+					right_grabbed_obj = collider
 		elif right_grabbed_obj != null:
 			remove_collision_exception_with(right_grabbed_obj)
 			right_grabbed_obj = null
@@ -90,7 +94,8 @@ func _input(event: InputEvent) -> void:
 					if collider.has_method("_sell_package"):
 						collider._sell_package()
 				"shop":
-					if collider.has_method("_opened_shop"):
+					if collider.has_method("_opened_shop") and !is_shop_open:
+						is_shop_open = true
 						set_physics_process(false)
 						camera_enabled = false
 						collider._opened_shop(self)
@@ -154,3 +159,11 @@ func _set_wallet(new_value):
 	if wallet != new_value:
 		wallet = new_value
 		SignalBus.update_wallet.emit(wallet)
+func _mouse_mode_manager(new_value):
+	if is_shop_open != new_value:
+		is_shop_open = new_value
+		match is_shop_open:
+			true:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			false:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
