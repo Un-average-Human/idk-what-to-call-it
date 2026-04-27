@@ -39,22 +39,13 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	var target_tilt_rad = deg_to_rad(steering_input * airship.tilt_angle)
+	var angle_difference = target_tilt_rad - global_rotation.z
 	
-	# 2. Calculate the Error (Distance from target)
-	var angle_error = target_tilt_rad - global_rotation.z
-	
-	# 3. PD Controller (Proportional-Derivative)
-	# This is the "Torque only" way to reach and stop at a specific angle.
-	# 'spring_stiffness' is how hard it pushes to reach the angle.
-	# 'spring_damping' is how much it resists wobbling.
 	var spring_stiffness = 20.0 
 	var spring_damping = 5.0
 	
-	# Formula: (Distance * Stiffness) - (Current Speed * Damping)
-	var torque_z = (angle_error * spring_stiffness) - (angular_velocity.z * spring_damping)
+	var torque_z = (angle_difference * spring_stiffness) - (angular_velocity.z * spring_damping)
 	
-	# 4. Apply the Torque
-	# We multiply by mass so it feels the same if you change the ship's weight
 	apply_torque(global_transform.basis.z * torque_z * mass)
 	
 	#making the camera arm follow the airship
