@@ -16,6 +16,7 @@ var current_speed := 0.0
 var player_driving: CharacterBody3D
 @export var camera_arm: SpringArm3D
 var is_preview: bool = false
+var in_tornado: bool = false
 var tilt_factor: float = 0.0
 
 func _ready() -> void:
@@ -64,14 +65,14 @@ func _physics_process(delta: float) -> void:
 
 #turning and tilting functions. Ill leave the tilt as it is cuz this shit is irritating me
 	if steering_input != null and current_speed != 0:
-		angular_velocity.y = lerpf(angular_velocity.y, steering_input, smoothstep(0, 1, delta * airship.turn_power))
+		angular_velocity.y = lerpf(angular_velocity.y, direction * steering_input, smoothstep(0, 1, delta * airship.turn_power))
 	global_rotation.x = 0.0
 	
 #propellers
 	if current_speed != 0:
 		for propeller in propellers:
 			propeller.rotate_z(propeller_rotating_speed * current_speed * delta)
-	rudder.rotation.y = lerp_angle(rudder.rotation.y, deg_to_rad(direction * steering_input * -airship.rudder_max_rotation), delta * 5)
+	rudder.rotation.y = lerp_angle(rudder.rotation.y, deg_to_rad(steering_input * -airship.rudder_max_rotation), delta * 5)
 	helm.rotation.y = lerp(helm.rotation.y, deg_to_rad(direction * steering_input * airship.helm_max_rotation), delta * 5)
 	#forward direction is negative for sum reason, thats why im using "less than". Stupid engine frfr
 	apply_central_force(Vector3(0, current_lift, 0))

@@ -23,6 +23,7 @@ mesh = SubResource("CapsuleMesh_i3pqv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="player_camera" type="Camera3D" parent="neck" unique_id=19096833]
+near = 0.1
 
 [node name="interact_ray" type="RayCast3D" parent="neck/player_camera" unique_id=334059208]
 transform = Transform3D(1, 0, 0, 0, -9.835062e-08, -1, 0, 2.25, -4.371139e-08, 0, 0, 0)

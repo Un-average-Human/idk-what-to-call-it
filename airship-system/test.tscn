@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b6bbbluqw1jrs" path="res://scenes/airship_scenes/pigeon.tscn" id="4_g14j6"]
 [ext_resource type="PackedScene" uid="uid://bkcvgsgnv0pc" path="res://scenes/delivery_scenes/package_ordering.tscn" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://bdbur4eiirwah" path="res://scenes/airship_scenes/shop/shop.tscn" id="4_ykrsh"]
+[ext_resource type="Script" uid="uid://ckism4k1xy3po" path="res://tornado.gd" id="5_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://64aoubusnpyi" path="res://tornado.tscn" id="6_g14j6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37kl0"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -19,6 +21,10 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37kl0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ykrsh"]
+height = 265.5
+radius = 98.0
 
 [node name="Node3D" type="Node3D" unique_id=1689576366]
 
@@ -47,3 +53,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 5)
 
 [node name="balloon" parent="." unique_id=1545166384 instance=ExtResource("4_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16052723, -0.06461197, -3.914108)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=146306214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -113)
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 2.0
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 30.0
+script = ExtResource("5_ykrsh")
+spin_speed = 100000.0
+radius = 98.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1558040519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 110.25, 0)
+shape = SubResource("CylinderShape3D_ykrsh")
+
+[node name="tornado" parent="Area3D" unique_id=468389314 instance=ExtResource("6_g14j6")]
+transform = Transform3D(0.558, 0, 0, 0, 0.558, 0, 0, 0, 0.558, -5, 0, 5)
