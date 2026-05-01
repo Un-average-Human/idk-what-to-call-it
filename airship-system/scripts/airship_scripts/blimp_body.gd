@@ -43,11 +43,10 @@ func _physics_process(delta: float) -> void:
 	var angle_difference = target_tilt_rad - global_rotation.z
 	
 	var spring_stiffness = 20.0 
-	var spring_damping = 5.0
+	var spring_damping = 06.0
 	
 	var torque_z = (angle_difference * spring_stiffness) - (angular_velocity.z * spring_damping)
 	
-	apply_torque(global_transform.basis.z * torque_z * mass)
 	
 	#making the camera arm follow the airship
 	if !is_preview:
@@ -63,17 +62,25 @@ func _physics_process(delta: float) -> void:
 	elif current_speed < 0:
 		direction = -1
 
-#turning and tilting functions. Ill leave the tilt as it is cuz this shit is irritating me
+#turning and tilting functions
+	apply_torque(global_transform.basis.x * -global_rotation.x * 50 * mass)
+	if current_speed == 0:
+		apply_torque(global_transform.basis.z * torque_z * mass)
+
 	if steering_input != null and current_speed != 0:
 		angular_velocity.y = lerpf(angular_velocity.y, direction * steering_input, smoothstep(0, 1, delta * airship.turn_power))
-	global_rotation.x = 0.0
+		apply_torque(global_transform.basis.z * torque_z * mass)
+		
 	
 #propellers
 	if current_speed != 0:
 		for propeller in propellers:
 			propeller.rotate_z(propeller_rotating_speed * current_speed * delta)
+#rudder and helm
 	rudder.rotation.y = lerp_angle(rudder.rotation.y, deg_to_rad(steering_input * -airship.rudder_max_rotation), delta * 5)
 	helm.rotation.y = lerp(helm.rotation.y, deg_to_rad(direction * steering_input * airship.helm_max_rotation), delta * 5)
-	#forward direction is negative for sum reason, thats why im using "less than". Stupid engine frfr
+#lift
 	apply_central_force(Vector3(0, current_lift, 0))
-	linear_velocity = linear_velocity.lerp(global_transform.basis.z * -current_speed, airship.speed_increment)
+#forward and backward movement
+	apply_central_force(-global_transform.basis.z * current_speed * mass)
+	apply_central_force(-linear_velocity * mass * 0.5)

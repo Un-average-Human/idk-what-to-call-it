@@ -76,14 +76,15 @@ func _input(event: InputEvent) -> void:
 #sit
 	if Input.is_action_just_pressed("E"):
 		#sit
+		if is_piloting == true:
+			_pilot_airship(self.get_parent())
+			return
 		if !interact_ray.is_colliding():
 			return
 		var collider = interact_ray.get_collider()
 		if is_piloting == false:
 			if collider.is_in_group("pilot_seat"):
 				_pilot_airship(collider)
-		else:
-			_pilot_airship(self.get_parent())
 		
 		for group in collider.get_groups():
 			match group:
@@ -135,8 +136,6 @@ func _physics_process(delta: float) -> void:
 #current knowledge as I still need to add multiplayer unfortunately
 func _pilot_airship(target_airship):
 	if is_piloting == false:
-		if target_airship.get_meta("being_piloted") == true:
-			return
 		is_piloting = true
 		collision_shape.disabled = true
 		global_transform = target_airship.global_transform
