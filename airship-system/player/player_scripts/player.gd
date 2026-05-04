@@ -20,9 +20,11 @@ var is_piloting := false
 var is_seating := false
 
 #movement variables
-var SPEED := 5.0
+const SPEED := 5.0
 const JUMP_VELOCITY = 5
 var camera_enabled: bool = true
+const ACCELERATION = 10.0
+const DECELERATION := 8.0
 
 # money
 var wallet: float = 500.0: set = _set_wallet
@@ -30,6 +32,12 @@ var wallet: float = 500.0: set = _set_wallet
 #airships
 var owned_airships: Array[AirshipData]
 var airship_spawned: RigidBody3D
+
+#gear
+var is_hooked: bool = false
+var is_swinging: bool = false
+var player_attachment: RigidBody3D
+var owned_gear: Array
 
 #shop
 var is_shop_open: bool = false: set = _mouse_mode_manager
@@ -44,6 +52,8 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	elif Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+#camera
 	if event is InputEventMouseMotion and camera_enabled == true:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			rotate_y(-event.relative.x * SENSITIVITY)
@@ -61,6 +71,7 @@ func _input(event: InputEvent) -> void:
 		elif left_grabbed_obj != null:
 			remove_collision_exception_with(left_grabbed_obj)
 			left_grabbed_obj = null
+
 #right hand
 	if Input.is_action_just_pressed("G"):
 		if right_grabbed_obj == null:
@@ -73,7 +84,8 @@ func _input(event: InputEvent) -> void:
 			remove_collision_exception_with(right_grabbed_obj)
 			right_grabbed_obj = null
 
-#sit
+
+
 	if Input.is_action_just_pressed("E"):
 		#sit
 		if is_piloting == true:
@@ -123,12 +135,27 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+	if is_on_floor():
+		is_swinging = false
+	if is_swinging:
+		if is_instance_valid(player_attachment):
+			# 1. Sync position/velocity (This moves the player node)
+			global_position = player_attachment.global_position
+			velocity = player_attachment.linear_velocity
+			
+			# 2. Apply WASD Force to the physics body
+			# We use 'direction' from your input calculation
+			if direction != Vector3.ZERO:
+				# force = direction * strength
+				player_attachment.apply_central_force(direction * SPEED * player_attachment.mass)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if direction:
+			velocity.x = lerpf(velocity.x, direction.x * SPEED, ACCELERATION * delta)
+			velocity.z = lerpf(velocity.z, direction.z * SPEED, ACCELERATION * delta)
+		else:
+			if velocity.length() <= SPEED or is_on_floor():
+				velocity.x = move_toward(velocity.x, 0, DECELERATION * delta * SPEED)
+				velocity.z = move_toward(velocity.z, 0, DECELERATION * delta * SPEED)
 
 	move_and_slide()
 
