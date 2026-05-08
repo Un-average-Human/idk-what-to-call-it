@@ -34,8 +34,6 @@ var owned_airships: Array[AirshipData]
 var airship_spawned: RigidBody3D
 
 #gear
-var is_hooked: bool = false
-var is_swinging: bool = false
 var player_attachment: RigidBody3D
 var owned_gear: Array
 
@@ -135,27 +133,13 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if is_on_floor():
-		is_swinging = false
-	if is_swinging:
-		if is_instance_valid(player_attachment):
-			# 1. Sync position/velocity (This moves the player node)
-			global_position = player_attachment.global_position
-			velocity = player_attachment.linear_velocity
-			
-			# 2. Apply WASD Force to the physics body
-			# We use 'direction' from your input calculation
-			if direction != Vector3.ZERO:
-				# force = direction * strength
-				player_attachment.apply_central_force(direction * SPEED * player_attachment.mass)
+	if direction:
+		velocity.x = lerpf(velocity.x, direction.x * SPEED, ACCELERATION * delta)
+		velocity.z = lerpf(velocity.z, direction.z * SPEED, ACCELERATION * delta)
 	else:
-		if direction:
-			velocity.x = lerpf(velocity.x, direction.x * SPEED, ACCELERATION * delta)
-			velocity.z = lerpf(velocity.z, direction.z * SPEED, ACCELERATION * delta)
-		else:
-			if velocity.length() <= SPEED or is_on_floor():
-				velocity.x = move_toward(velocity.x, 0, DECELERATION * delta * SPEED)
-				velocity.z = move_toward(velocity.z, 0, DECELERATION * delta * SPEED)
+		if velocity.length() <= SPEED or is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, DECELERATION * SPEED)
+			velocity.z = move_toward(velocity.z, 0, DECELERATION * SPEED)
 
 	move_and_slide()
 

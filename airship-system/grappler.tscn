@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://cmm6xs5lwi5og"]
-
-[ext_resource type="Script" uid="uid://cjgkykibq6sof" path="res://addons/grappling_hook_3d/src/hook_controller.gd" id="1_dpmwk"]
-
-[node name="grappler" type="Node" unique_id=569305542]
-script = ExtResource("1_dpmwk")
-launch_action_name = "LMB"
-retract_action_name = "LMB"

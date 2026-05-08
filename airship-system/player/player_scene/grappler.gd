@@ -1,93 +1,48 @@
-extends Node3D
+extends Node
 
-@export var ray: RayCast3D
 @export var player: CharacterBody3D
-var target: Vector3
-var distance
-var is_swinging: bool = false
-var is_pulling: bool = false
-var player_attachment: RigidBody3D
-var current_joint: PinJoint3D
-var current_anchor: StaticBody3D
-
-func _ready() -> void:
-	set_physics_process(false)
+@export var projectile_scene: PackedScene
+@export var ray: RayCast3D
+@export var origin: Marker3D
+var projectile_instance
+var target_point
+var target_dir
+var test: Array
+var can_shoot: bool = true
+@export var launch_speed = 30.0
 
 func _input(event: InputEvent) -> void:
-#pull
-	if Input.is_action_just_pressed("LMB"):
-		if ray.is_colliding() and is_pulling == false and is_swinging == false:
-			target = ray.get_collision_point()
-			distance = player.global_position.distance_to(target)
-			if distance > 3:
-				set_physics_process(true)
-				is_pulling = true
-				player.is_hooked = true
+	if event.is_action_pressed("LMB"):
+		if is_instance_valid(projectile_instance):
+			projectile_instance.queue_free()
+		elif can_shoot:
+			_shoot()
 
-#swing
-	if Input.is_action_just_pressed("RMB") and player.is_hooked == false:
-		if ray.is_colliding():
-			target = ray.get_collision_point()
-			distance = player.global_position.distance_to(target)
-			if distance > 3:
-				player.is_swinging = true
-				set_physics_process(true)
-				_swing()
-	if Input.is_action_just_released("RMB"):
-		if current_joint:
-			current_joint.queue_free()
-		if current_anchor:
-			current_anchor.queue_free()
-		if player_attachment:
-			player.velocity = player_attachment.linear_velocity
-			player_attachment.queue_free()
-		is_swinging = false
-
-func _physics_process(delta: float) -> void:
-	distance = player.global_position.distance_to(target)
-	if is_pulling:
-		if distance < 1.5:
-			player.is_hooked = false
-			set_physics_process(false)
-			is_pulling = false
-			return
-		_pull(delta)
-	if is_swinging == true:
-		if player_attachment != null:
-			player.global_position = player_attachment.global_position
-			player.velocity = player_attachment.linear_velocity
-			var height_diff = target.y - player.global_position.y
-			if height_diff < 1.5 and player_attachment.linear_velocity.y > 0:
-				player_attachment.linear_damp = 1.0
-			else:
-				player_attachment.linear_damp = 0.0
-
-func _pull(delta: float):
-	var direction = player.global_position.direction_to(target)
-	player.velocity = direction * 20.0
-
-func _swing():
-	if is_swinging == false:
-		is_swinging = true
-		var root = get_tree().root
-		
-		current_joint = PinJoint3D.new()
-		root.add_child(current_joint)
-		
-		current_anchor = StaticBody3D.new()
-		root.add_child(current_anchor)
-		current_anchor.global_position = target
-		
-		player_attachment = RigidBody3D.new()
-		root.add_child(player_attachment)
-		player_attachment.can_sleep = false
-		player_attachment.mass = 62
-		
-		player_attachment.global_position = player.global_position
-		player.player_attachment = player_attachment
-		player_attachment.linear_velocity = player.velocity
-		
-		current_joint.global_position = target
-		
-		current_joint.node_a = current_anchor.get_path()
-		current_joint.node_b = player_attachment.get_path()
+func _shoot():
+	
+	can_shoot = false
+	
+	if is_instance_valid(projectile_instance):
+		projectile_instance.queue_free()
+	
+	projectile_instance = projectile_scene.instantiate()
+	get_tree().root.add_child(projectile_instance)
+	projectile_instance.add_collision_exception_with(player)
+	projectile_instance.gun = self
+	projectile_instance._on_firing()
+	projectile_instance.player = player
+	projectile_instance.global_position = origin.global_position
+	
+	
+	if ray.is_colliding():
+		target_point = ray.get_collision_point()
+		projectile_instance.look_at(target_point)
+	else:
+		target_point = ray.to_global(ray.target_position)
+		projectile_instance.look_at(target_point)
+	
+	target_dir = projectile_instance.global_position.direction_to(target_point)
+	projectile_instance.linear_velocity = target_dir * projectile_instance.speed
+	
+	await get_tree().create_timer(projectile_instance.cooldown).timeout
+	can_shoot = true

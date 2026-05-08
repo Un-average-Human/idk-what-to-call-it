@@ -47,6 +47,8 @@ buy_package=""
 grabbable=""
 sell_package=""
 shop=""
+hook=""
+player=""
 
 [input]
 

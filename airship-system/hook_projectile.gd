@@ -1,0 +1,42 @@
+extends Projectile
+
+var target: Vector3
+var target_dir: Vector3
+var is_active: bool = false
+@export var rope_scene: PackedScene
+var rope: Node3D
+
+func _on_firing():
+	rope = rope_scene.instantiate()
+	add_child(rope)
+	rope.top_level = true
+
+func _on_collision(body: Node) -> void:
+	is_active = false
+	
+	#makes sure other code has ran before freezing (prevents from freezing in the air)
+	set_deferred("freeze", true)
+	target = global_position
+	target_dir = player.global_position.direction_to(target)
+	is_active = true
+
+func _physics_process(delta: float) -> void:
+	var distance = gun.origin.global_position.distance_to(self.global_position)
+	rope.global_position = gun.origin.global_position
+	rope.look_at(self.global_position)
+	rope.scale = Vector3(1, 1, distance/2.0)
+	if distance > 200:
+		_delete()
+
+	if is_active:
+		var target_dist = player.global_position.distance_to(target)
+		player.velocity = target_dir * 20.0
+		
+		player.move_and_slide()
+		
+		if target_dist <= 2.0:
+			_delete()
+
+func _delete():
+	is_active = false
+	queue_free()

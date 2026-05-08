@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://d1n7acth4s57"]
+
+[ext_resource type="Script" uid="uid://doccfhwxx45sn" path="res://hook_projectile.gd" id="1_1mm2r"]
+[ext_resource type="PackedScene" uid="uid://c4jg85h2yi3dk" path="res://rope.tscn" id="2_n13h4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1mm2r"]
+size = Vector3(0.22680664, 0.28125, 0.296875)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ldsl7"]
+
+[node name="hook" type="RigidBody3D" unique_id=412443366 groups=["hook"]]
+continuous_cd = true
+script = ExtResource("1_1mm2r")
+rope_scene = ExtResource("2_n13h4")
+speed = 30.0
+cooldown = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=226020648]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.002252819, -0.011657715, -0.009247448)
+shape = SubResource("BoxShape3D_1mm2r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1299894464]
+transform = Transform3D(-1.5454311e-09, 2.3181466e-09, 0.05000001, 0.035355344, 0.053033017, 0, -0.035355344, 0.053033017, -2.1855697e-09, 0.0022528195, 0.050400443, 0.0024102665)
+mesh = SubResource("CylinderMesh_ldsl7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1898946114]
+transform = Transform3D(0.035355344, 0.05303302, -1.5454313e-09, 0, -3.2783547e-09, -0.05000001, -0.035355344, 0.053033013, -1.5454311e-09, 0.052653257, 0, 0.0024102645)
+mesh = SubResource("CylinderMesh_ldsl7")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1259703598]
+transform = Transform3D(-1.5454317e-09, 1.1590733e-08, -0.05000001, -0.035355344, -0.053033017, -4.3711395e-09, -0.035355344, 0.053033017, 6.556709e-09, 0.0022528195, -0.0500068, 0.0024102665)
+mesh = SubResource("CylinderMesh_ldsl7")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=342426295]
+transform = Transform3D(-0.035355344, -0.053033013, -1.5454311e-09, 0, -3.2783547e-09, 0.05000001, -0.035355344, 0.05303302, 1.5454313e-09, -0.047753997, 0, 0.0024102686)
+mesh = SubResource("CylinderMesh_ldsl7")
