@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dwonluj7neod2"]
 
-[ext_resource type="Script" uid="uid://bgtd1r4mcvyoy" path="res://scripts/airship_scripts/shop/shipwright_popup.gd" id="1_eovu0"]
+[ext_resource type="Script" uid="uid://bgtd1r4mcvyoy" path="res://scripts/shop/shipwright_popup.gd" id="1_eovu0"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=608393999 node_paths=PackedStringArray("shop_button", "hangar_button", "close_button", "shipwright_name_label")]
 script = ExtResource("1_eovu0")

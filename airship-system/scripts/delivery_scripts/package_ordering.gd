@@ -12,4 +12,4 @@ func _buy_package(player: CharacterBody3D):
 		package_instance.global_position = package_spawn_pos.global_position
 		#set the player as the owner and subtracts the box price from the player's money
 		player.wallet -= package_instance.base_price
-		package_instance.original_owner = player
+		package_instance.current_owner = player

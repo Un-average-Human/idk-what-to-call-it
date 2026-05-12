@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://be7o3nb4op2bf" path="res://player/player_scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://c1fy7lbk6mdpc" path="res://player/player_scene/player_ui.tscn" id="2_t0cpu"]
 [ext_resource type="Script" uid="uid://d1bxlxj6wf54t" path="res://player/player_scene/grappler.gd" id="3_ocfq7"]
-[ext_resource type="PackedScene" uid="uid://d1n7acth4s57" path="res://hook.tscn" id="4_qhbuq"]
+[ext_resource type="PackedScene" uid="uid://b7p0171nmce6x" path="res://scenes/projectiles/zipline_projectile.tscn" id="4_qhbuq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_i3pqv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qhbuq"]
+radius = 0.6
+height = 2.2
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1113979859 groups=["player"]]
 floor_max_angle = 1.2217305
@@ -48,3 +52,7 @@ player = NodePath("..")
 projectile_scene = ExtResource("4_qhbuq")
 ray = NodePath("../neck/player_camera/interact_ray2")
 origin = NodePath("../neck/player_camera/left_hand")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=72015748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_qhbuq")

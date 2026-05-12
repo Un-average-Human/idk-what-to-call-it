@@ -41,7 +41,7 @@ shader_parameter/intesityColor = 5.0
 shader_parameter/ColorParameter = Color(0.1882353, 0.1882353, 0.18431373, 1)
 shader_parameter/polarcoord = Vector2(0.5, 5)
 shader_parameter/scale = Vector2(2, 2)
-shader_parameter/speed = 0.5
+shader_parameter/speed = 1.0
 shader_parameter/textureObj = SubResource("NoiseTexture2D_kafmk")
 shader_parameter/gradient = SubResource("GradientTexture2D_qubxm")
 
@@ -78,7 +78,7 @@ shader_parameter/intesityColor = 5.0
 shader_parameter/ColorParameter = Color(0.23826236, 0.23826215, 0.23826224, 1)
 shader_parameter/polarcoord = Vector2(0.5, 5)
 shader_parameter/scale = Vector2(2, 2)
-shader_parameter/speed = 0.5
+shader_parameter/speed = 1.0
 shader_parameter/textureObj = SubResource("NoiseTexture2D_qvuio")
 shader_parameter/gradient = SubResource("GradientTexture2D_0ihqv")
 
@@ -110,7 +110,7 @@ shader_parameter/intesityColor = 30.0
 shader_parameter/ColorParameter = Color(0.1022433, 0.10224319, 0.10224321, 1)
 shader_parameter/polarcoord = Vector2(0.5, 5)
 shader_parameter/scale = Vector2(2, 2)
-shader_parameter/speed = 0.5
+shader_parameter/speed = 1.0
 shader_parameter/textureObj = SubResource("NoiseTexture2D_4fr61")
 shader_parameter/gradient = SubResource("GradientTexture2D_71ofb")
 
@@ -142,7 +142,7 @@ shader_parameter/intesityColor = 1.02
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 shader_parameter/polarcoord = Vector2(0.5, 5)
 shader_parameter/scale = Vector2(2, 2)
-shader_parameter/speed = 0.5
+shader_parameter/speed = 1.0
 shader_parameter/textureObj = SubResource("NoiseTexture2D_mamd8")
 shader_parameter/gradient = SubResource("GradientTexture2D_ul2ok")
 

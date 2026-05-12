@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b7p0171nmce6x"]
+
+[ext_resource type="Script" uid="uid://bq3rb3orweymo" path="res://scenes/projectiles/zipline_projectile.gd" id="1_0lq08"]
+[ext_resource type="PackedScene" uid="uid://c4jg85h2yi3dk" path="res://rope.tscn" id="2_df7xo"]
+[ext_resource type="PackedScene" uid="uid://cvl7ucnd5bs0g" path="res://zipline.tscn" id="2_o8kva"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ol0w8"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0lq08"]
+radius = 0.25
+
+[node name="zipline_projectile" type="RigidBody3D" unique_id=1123379569]
+continuous_cd = true
+script = ExtResource("1_0lq08")
+zipline_scene = ExtResource("2_o8kva")
+rope_scene = ExtResource("2_df7xo")
+speed = 30.0
+cooldown = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1625377812]
+layers = 17
+mesh = SubResource("SphereMesh_ol0w8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1138313725]
+shape = SubResource("SphereShape3D_0lq08")

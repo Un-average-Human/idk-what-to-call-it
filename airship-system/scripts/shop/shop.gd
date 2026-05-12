@@ -1,5 +1,5 @@
 extends StaticBody3D
-var shipwright_popup_scene = preload("res://scenes/airship_scenes/shop/shipwright_popup.tscn")
+var shipwright_popup_scene = preload("res://scenes/shop/shipwright_popup.tscn")
 
 @export var shipwright: ShipwrightData
 

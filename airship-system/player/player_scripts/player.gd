@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var neck: Node3D = $neck
 @onready var player_camera: Camera3D = $neck/player_camera
 var SENSITIVITY := 0.01
+var can_freely_move_cam: bool = true
 
 #grabbing system variables
 var left_grabbed_obj: RigidBody3D = null
@@ -16,6 +17,7 @@ var right_grabbed_obj: RigidBody3D = null
 
 #pilot and seat variables
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
+var can_move := true
 var is_piloting := false
 var is_seating := false
 
@@ -34,6 +36,7 @@ var owned_airships: Array[AirshipData]
 var airship_spawned: RigidBody3D
 
 #gear
+var is_hooked: bool = false
 var player_attachment: RigidBody3D
 var owned_gear: Array
 
@@ -54,9 +57,13 @@ func _input(event: InputEvent) -> void:
 #camera
 	if event is InputEventMouseMotion and camera_enabled == true:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			rotate_y(-event.relative.x * SENSITIVITY)
+			if can_freely_move_cam:
+				rotate_y(-event.relative.x * SENSITIVITY)
+			else:
+				neck.rotate_y(-event.relative.x * SENSITIVITY)
+				neck.rotation.y =clamp(neck.rotation.y, deg_to_rad(-90), deg_to_rad(90))
 			player_camera.rotate_x(-event.relative.y * SENSITIVITY)
-			player_camera.rotation.x =clamp(player_camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+			player_camera.rotation.x =clamp(player_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 #left hand
 	if Input.is_action_just_pressed("F"):
@@ -107,13 +114,13 @@ func _input(event: InputEvent) -> void:
 				"shop":
 					if collider.has_method("_opened_shop") and !is_shop_open:
 						is_shop_open = true
-						set_physics_process(false)
+						
 						camera_enabled = false
 						collider._opened_shop(self)
 
 func _physics_process(delta: float) -> void:
 	#wont run if the player is piloting an airship or if they are seating
-	if is_piloting == true or is_seating == true:
+	if can_move == false:
 		return
 	if left_grabbed_obj != null:
 		left_grabbed_obj.linear_velocity = (left_hand.global_position - left_grabbed_obj.global_position) * 20
@@ -133,11 +140,12 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	if direction:
 		velocity.x = lerpf(velocity.x, direction.x * SPEED, ACCELERATION * delta)
 		velocity.z = lerpf(velocity.z, direction.z * SPEED, ACCELERATION * delta)
 	else:
-		if velocity.length() <= SPEED or is_on_floor():
+		if !is_hooked:
 			velocity.x = move_toward(velocity.x, 0, DECELERATION * SPEED)
 			velocity.z = move_toward(velocity.z, 0, DECELERATION * SPEED)
 
@@ -148,6 +156,7 @@ func _physics_process(delta: float) -> void:
 func _pilot_airship(target_airship):
 	if is_piloting == false:
 		is_piloting = true
+		can_move = false
 		collision_shape.disabled = true
 		global_transform = target_airship.global_transform
 		reparent(target_airship)
@@ -156,6 +165,7 @@ func _pilot_airship(target_airship):
 		
 	elif is_piloting == true:
 		is_piloting = false
+		can_move = true
 		collision_shape.disabled = false
 		target_airship.get_parent().player_driving = null
 		reparent(get_tree().root)

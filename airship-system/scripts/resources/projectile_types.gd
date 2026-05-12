@@ -8,6 +8,8 @@ signal collided(at_position: Vector3, projectile: Projectile)
 @export var collision_exceptions: Array
 @export var player: CharacterBody3D
 @export var cooldown: float
+@export var single_shot: bool
+var can_shoot: bool = true
 
 func _on_firing():
 	pass
@@ -18,4 +20,6 @@ func _ready() -> void:
 	body_entered.connect(_on_collision)
 
 func _on_collision(body: Node) -> void:
+	pass
+func _delete():
 	pass

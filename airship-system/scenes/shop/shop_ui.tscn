@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tbspm3kva16q"]
 
-[ext_resource type="Script" uid="uid://cyis1pi2arslc" path="res://scripts/airship_scripts/shop/shop_ui.gd" id="1_hclne"]
+[ext_resource type="Script" uid="uid://cyis1pi2arslc" path="res://scripts/shop/shop_ui.gd" id="1_hclne"]
 
 [sub_resource type="Theme" id="Theme_fscwk"]
 

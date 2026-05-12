@@ -13,17 +13,19 @@ var can_shoot: bool = true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("LMB"):
+		if !can_shoot:
+			return
 		if is_instance_valid(projectile_instance):
-			projectile_instance.queue_free()
-		elif can_shoot:
+			if projectile_instance.single_shot == true:
+				projectile_instance._delete()
+			else:
+				_shoot()
+		else:
 			_shoot()
 
 func _shoot():
 	
 	can_shoot = false
-	
-	if is_instance_valid(projectile_instance):
-		projectile_instance.queue_free()
 	
 	projectile_instance = projectile_scene.instantiate()
 	get_tree().root.add_child(projectile_instance)

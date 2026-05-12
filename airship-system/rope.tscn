@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c4jg85h2yi3dk"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1a244"]
-top_radius = 0.01
-bottom_radius = 0.01
+top_radius = 0.025
+bottom_radius = 0.025
 
 [node name="rope" type="Node3D" unique_id=566420770]
 

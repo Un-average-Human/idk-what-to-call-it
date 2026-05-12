@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1n7acth4s57"]
 
-[ext_resource type="Script" uid="uid://doccfhwxx45sn" path="res://hook_projectile.gd" id="1_1mm2r"]
-[ext_resource type="PackedScene" uid="uid://c4jg85h2yi3dk" path="res://rope.tscn" id="2_n13h4"]
+[ext_resource type="Script" uid="uid://doccfhwxx45sn" path="res://scripts/projectiles/hook_projectile.gd" id="1_1kbep"]
+[ext_resource type="PackedScene" uid="uid://c4jg85h2yi3dk" path="res://rope.tscn" id="2_cedxb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1mm2r"]
 size = Vector3(0.22680664, 0.28125, 0.296875)
@@ -10,10 +10,11 @@ size = Vector3(0.22680664, 0.28125, 0.296875)
 
 [node name="hook" type="RigidBody3D" unique_id=412443366 groups=["hook"]]
 continuous_cd = true
-script = ExtResource("1_1mm2r")
-rope_scene = ExtResource("2_n13h4")
+script = ExtResource("1_1kbep")
+rope_scene = ExtResource("2_cedxb")
 speed = 30.0
 cooldown = 2.0
+single_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=226020648]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.002252819, -0.011657715, -0.009247448)

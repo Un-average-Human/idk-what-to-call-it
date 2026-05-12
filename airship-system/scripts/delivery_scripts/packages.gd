@@ -5,4 +5,4 @@ enum package_type{COFFEE, IRON, ALUMINIUM, FLOUR, GOLD, SILK, COAL, WOOD, MILK, 
 @export var weight: int
 @export var base_price: float
 @export var type: package_type
-var original_owner: CharacterBody3D
+var current_owner: CharacterBody3D

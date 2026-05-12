@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdbur4eiirwah"]
 
-[ext_resource type="Script" uid="uid://oapj2woij64c" path="res://scripts/airship_scripts/shop/shop.gd" id="1_viryw"]
+[ext_resource type="Script" uid="uid://oapj2woij64c" path="res://scripts/shop/shop.gd" id="1_viryw"]
 [ext_resource type="Resource" uid="uid://cnsiohhchw71u" path="res://resources/shipwrights/ironspire.tres" id="2_gjj8g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rplqf"]

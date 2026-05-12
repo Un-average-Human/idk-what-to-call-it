@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://co6ldalc12ob8" path="res://player/player_scene/player.tscn" id="2_8uh7m"]
 [ext_resource type="PackedScene" uid="uid://b6bbbluqw1jrs" path="res://scenes/airship_scenes/pigeon.tscn" id="4_g14j6"]
 [ext_resource type="PackedScene" uid="uid://bkcvgsgnv0pc" path="res://scenes/delivery_scenes/package_ordering.tscn" id="4_ppyta"]
-[ext_resource type="PackedScene" uid="uid://bdbur4eiirwah" path="res://scenes/airship_scenes/shop/shop.tscn" id="4_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://bdbur4eiirwah" path="res://scenes/shop/shop.tscn" id="4_ykrsh"]
 [ext_resource type="Texture2D" uid="uid://csg038gj5vrk2" path="res://addons/kenney_prototype_textures/purple/texture_06.png" id="6_g14j6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37kl0"]
@@ -90,6 +90,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7943773, 15.92206, 21.2634
 material_override = SubResource("StandardMaterial3D_00tp4")
 use_collision = true
 size = Vector3(2, 2, 2)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="." unique_id=1775707719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.205624, 15.92206, 21.26349)
+material_override = SubResource("StandardMaterial3D_00tp4")
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=851446676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7943773, 4.92206, 21.26349)
+material_override = SubResource("StandardMaterial3D_00tp4")
+use_collision = true
+size = Vector3(2, 12, 2)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="." unique_id=316174138]
+transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, -6.7943773, 4.92206, 21.26349)
+material_override = SubResource("StandardMaterial3D_00tp4")
+use_collision = true
+size = Vector3(2, 15, 2)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=1631120228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.205624, 4.92206, 21.26349)
+material_override = SubResource("StandardMaterial3D_00tp4")
+use_collision = true
+size = Vector3(2, 12, 2)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="." unique_id=949080173]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, 28.205624, 4.92206, 21.26349)
+material_override = SubResource("StandardMaterial3D_00tp4")
+use_collision = true
+size = Vector3(2, 15, 2)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1445455527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.200577, 15.92206, 14.607561)

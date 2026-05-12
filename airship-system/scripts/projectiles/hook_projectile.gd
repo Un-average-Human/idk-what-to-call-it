@@ -7,23 +7,28 @@ var is_active: bool = false
 var rope: Node3D
 
 func _on_firing():
+	if is_active:
+		_delete()
 	rope = rope_scene.instantiate()
 	add_child(rope)
 	rope.top_level = true
 
 func _on_collision(body: Node) -> void:
 	is_active = false
+	player.is_hooked = false
 	
 	#makes sure other code has ran before freezing (prevents from freezing in the air)
 	set_deferred("freeze", true)
 	target = global_position
 	target_dir = player.global_position.direction_to(target)
 	is_active = true
+	player.is_hooked = true
 
 func _physics_process(delta: float) -> void:
 	var distance = gun.origin.global_position.distance_to(self.global_position)
 	rope.global_position = gun.origin.global_position
-	rope.look_at(self.global_position)
+	if distance > 0.01:
+		rope.look_at(self.global_position)
 	rope.scale = Vector3(1, 1, distance/2.0)
 	if distance > 200:
 		_delete()
@@ -35,8 +40,10 @@ func _physics_process(delta: float) -> void:
 		player.move_and_slide()
 		
 		if target_dist <= 2.0:
-			_delete()
+			call_deferred("_delete")
 
 func _delete():
 	is_active = false
+	player.is_hooked = false
+	rope.queue_free()
 	queue_free()
