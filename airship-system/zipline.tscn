@@ -4,26 +4,16 @@
 
 [sub_resource type="Curve3D" id="Curve3D_t1ypm"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5dbw"]
-radius = 0.6
-height = 2.2
-
-[node name="Path3D" type="Path3D" unique_id=852752161 node_paths=PackedStringArray("temp_zipline_collision", "zipline_area", "path_follow")]
+[node name="Path3D" type="Path3D" unique_id=852752161 node_paths=PackedStringArray("temp_zipline_collision", "zipline_area")]
 curve = SubResource("Curve3D_t1ypm")
 script = ExtResource("1_o5dbw")
 temp_zipline_collision = NodePath("Area3D/CollisionShape3D")
 zipline_area = NodePath("Area3D")
-path_follow = NodePath("PathFollow")
-rope_thickness = 1.0
-
-[node name="PathFollow" type="PathFollow3D" parent="." unique_id=299551445]
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="PathFollow" unique_id=169758952]
-shape = SubResource("CapsuleShape3D_o5dbw")
-target_position = Vector3(0, 0, 0)
+rope_thickness = 0.5
 
 [node name="Area3D" type="Area3D" parent="." unique_id=534219680]
 
 [node name="CollisionShape3D" type="CollisionPolygon3D" parent="Area3D" unique_id=220624851]
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_player_ziplining"]
+[connection signal="body_entered" from="Area3D" to="." method="_player_in_range"]
+[connection signal="body_exited" from="Area3D" to="." method="_player_left_range"]

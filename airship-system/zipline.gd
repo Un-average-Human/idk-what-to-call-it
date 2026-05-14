@@ -6,10 +6,28 @@ extends Path3D
 @export_range(0.01, 2.0) var rope_thickness: float = 0.1
 
 var zipline_direction: float = 1.0
-var player: CharacterBody3D = null
+var is_below: bool
+var is_angled: bool
+var angle_threshold: float
 
-func _zipline_created():
-	#creates da collision shape that will be baked
+var active_players: Array[CharacterBody3D] = []
+var players_inside_zone: Array[CharacterBody3D] = []
+var player_speed: float
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("E"):
+		for target_player in players_inside_zone:
+			_on_player_ziplining(target_player)
+			break
+	if event.is_action_pressed("Space"):
+		var active_copy = active_players.duplicate()
+		for riding_player in active_copy:
+			if is_instance_valid(riding_player):
+				_on_player_stop_ziplining(riding_player)
+
+func _zipline_created() -> void:
+	if temp_zipline_collision == null:
+		return
 	temp_zipline_collision.polygon = PackedVector2Array([
 		Vector2(-rope_thickness, -rope_thickness),
 		Vector2(rope_thickness, -rope_thickness),
@@ -20,62 +38,55 @@ func _zipline_created():
 	var path_length = get_curve().get_baked_length()
 	temp_zipline_collision.depth  = path_length
 	temp_zipline_collision.position = curve.get_point_position(0)
-	
-	#aangles it properly
 	var end_point = curve.get_point_position(curve.point_count - 1)
 	temp_zipline_collision.look_at(end_point)
 	
 	temp_zipline_collision.position = curve.sample_baked(path_length / 2.0)
 
-func _delete():
-	if temp_zipline_collision:
-		temp_zipline_collision.queue_free()
-	path_follow.queue_free()
-	queue_free()
+func _player_in_range(body: Node3D) -> void:
+	if body.is_in_group("player") and body is CharacterBody3D:
+		if !players_inside_zone.has(body) and !active_players.has(body):
+			players_inside_zone.append(body)
 
-func _physics_process(delta: float) -> void:
-	if player:
-		var input = Input.get_axis("S", "W")
-		path_follow.progress += (5.0 * zipline_direction * input) * delta
-			
-		player.global_position = path_follow.global_position
+func _player_left_range(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		players_inside_zone.erase(body)
 
 func _on_player_ziplining(body: Node3D) -> void:
-	if !body.is_in_group("player"):
+	if active_players.has(body):
 		return
-		
-	player = body
+	
+	active_players.append(body)
+	players_inside_zone.erase(body)
+	
 	body.can_move = false
+	
+	#creates a pathfollwo for da player
+	var rider_follow = PathFollow3D.new()
+	var shape_cast = ShapeCast3D.new()
+	rider_follow.set_script(preload("res://player_ziplining.gd"))
+	add_child(rider_follow)
+	rider_follow.add_child(shape_cast)
 	
 	var player_pos = to_local(body.global_position) + Vector3(0, -2, 0)
 	var closest_point = get_curve().get_closest_offset(player_pos)
-	path_follow.progress = closest_point
 	
-	calculate_zipline_direction()
+	rider_follow.call("start_riding", body, self, closest_point)
 
-func calculate_zipline_direction() -> void:
-	var path_length: float = curve.get_baked_length()
-	
-	var start_pos: Vector3 = to_global(curve.sample_baked(0.0))
-	var end_pos: Vector3 = to_global(curve.sample_baked(path_length))
-	
-	var rope_dir: Vector3 = (end_pos - start_pos).normalized()
-	
-	var camera_node = player.get_node_or_null("Camera3D")
-	var target_transform = camera_node.global_transform if camera_node else player.global_transform
-	var camera_dir: Vector3 = -target_transform.basis.z 
-	
-	var dot: float = camera_dir.dot(rope_dir)
-	
-	var target_rotation: Vector3
-	
-	if dot >= 0.0:
-		zipline_direction = 1.0
-		target_rotation = to_global(curve.sample_baked(path_length))
-	else:
-		zipline_direction = -1.0
-		target_rotation = to_global(curve.sample_baked(0.0))
-	
-	target_rotation.y = player.global_position.y
-	player.can_freely_move_cam = false
-	player.look_at(target_rotation, Vector3.UP)
+func _on_player_stop_ziplining(body) -> void:
+	if active_players.has(body):
+		active_players.erase(body)
+		body.can_move = true
+		body.can_freely_move_cam = true
+		
+		for child in get_children():
+			if child is PathFollow3D and child.get("riding_player") == body:
+				child.queue_free()
+				
+		var tween: Tween = create_tween()
+		tween.tween_property(body.neck, "rotation", Vector3.ZERO, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+
+func _delete():
+	if temp_zipline_collision:
+		temp_zipline_collision.queue_free()
+	queue_free()
