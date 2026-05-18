@@ -9,7 +9,7 @@ curve = SubResource("Curve3D_t1ypm")
 script = ExtResource("1_o5dbw")
 temp_zipline_collision = NodePath("Area3D/CollisionShape3D")
 zipline_area = NodePath("Area3D")
-rope_thickness = 0.5
+rope_thickness = 0.75
 
 [node name="Area3D" type="Area3D" parent="." unique_id=534219680]
 

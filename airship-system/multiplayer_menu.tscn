@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://71bmn0d7714o"]
+
+[ext_resource type="Script" uid="uid://dp5liknjb8j0" path="res://multiplayer_menu.gd" id="1_6py18"]
+[ext_resource type="PackedScene" uid="uid://maebdulg310o" path="res://lobby.tscn" id="2_326qw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_326qw"]
+font_size = 30
+
+[node name="Control" type="Control" unique_id=1929140426]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6py18")
+lobby_scene = ExtResource("2_326qw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=582387204]
+layout_mode = 0
+offset_left = 76.132385
+offset_top = 386.0
+offset_right = 321.8676
+offset_bottom = 583.0
+
+[node name="create_lobby" type="Button" parent="VBoxContainer" unique_id=1090616251]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Create Lobby"
+
+[node name="join_lobby" type="Button" parent="VBoxContainer" unique_id=610214459]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Join Lobby"
+
+[node name="exit" type="Button" parent="VBoxContainer" unique_id=1600807544]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Return"
+
+[node name="title" type="Label" parent="." unique_id=369162736]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 36.0
+offset_right = 322.0
+offset_bottom = 89.0
+text = "Multiplayer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="join_lobby_menu" type="Control" parent="." unique_id=671956478]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 398.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="join_lobby_menu" unique_id=538472563]
+layout_mode = 0
+offset_right = 754.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="join_lobby_menu/Panel" unique_id=1829486701]
+layout_mode = 0
+offset_right = 754.0
+offset_bottom = 80.0
+text = "Lobbies"
+label_settings = SubResource("LabelSettings_326qw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="join_lobby_menu" unique_id=1221729285]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 100
+
+[node name="ScrollContainer" type="ScrollContainer" parent="join_lobby_menu/MarginContainer" unique_id=1079270424]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="join_lobby_menu/MarginContainer/ScrollContainer" unique_id=677457894]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="join_lobby_menu" unique_id=1066113327]
+layout_mode = 0
+offset_left = 218.66003
+offset_top = 577.0
+offset_right = 535.33997
+offset_bottom = 619.0
+
+[node name="create_lobby_menu" type="Control" parent="." unique_id=1910501958]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 398.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="create_lobby_menu" unique_id=577756929]
+layout_mode = 0
+offset_right = 754.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="create_lobby_menu/Panel" unique_id=1182690498]
+layout_mode = 0
+offset_right = 754.0
+offset_bottom = 80.0
+text = "Create Lobby"
+label_settings = SubResource("LabelSettings_326qw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lobby_name_label" type="Label" parent="create_lobby_menu" unique_id=1323825170]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 89.0
+offset_right = 95.0
+offset_bottom = 125.0
+text = "Lobby Name:"
+vertical_alignment = 1
+
+[node name="lobby_name" type="LineEdit" parent="create_lobby_menu/lobby_name_label" unique_id=14051135]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 132.0
+offset_top = 2.5
+offset_right = 351.0
+offset_bottom = 33.5
+placeholder_text = "Optional"
+
+[node name="lobby_size_label" type="Label" parent="create_lobby_menu" unique_id=1244406344]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 165.0
+offset_right = 79.0
+offset_bottom = 201.0
+text = "Lobby Size:"
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="create_lobby_menu/lobby_size_label" unique_id=886367912]
+layout_mode = 0
+offset_left = 132.0
+offset_right = 251.0
+offset_bottom = 31.0
+max_value = 4.0
+suffix = "Player(s)"
+
+[node name="lobby_type_label" type="Label" parent="create_lobby_menu" unique_id=1544877452]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 240.0
+offset_right = 86.0
+offset_bottom = 276.0
+text = "Lobby Type:"
+vertical_alignment = 1
+
+[node name="lobby_type_button" type="CheckButton" parent="create_lobby_menu/lobby_type_label" unique_id=1267610008]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 132.0
+offset_right = 235.0
+offset_bottom = 36.0
+text = "Private"
+
+[node name="lobby_code_label" type="Label" parent="create_lobby_menu" unique_id=630334763]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 44.0
+offset_top = 315.0
+offset_right = 88.0
+offset_bottom = 351.0
+text = "Lobby Code:"
+vertical_alignment = 1
+
+[node name="password_input" type="LineEdit" parent="create_lobby_menu/lobby_code_label" unique_id=878288110]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 132.0
+offset_top = 2.5
+offset_right = 351.0
+offset_bottom = 33.5
+placeholder_text = "Password..."
+max_length = 30
+
+[node name="create_lobby_button" type="Button" parent="create_lobby_menu" unique_id=994909346]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 218.66003
+offset_top = 577.0
+offset_right = 535.33997
+offset_bottom = 619.0
+text = "Create Lobby"

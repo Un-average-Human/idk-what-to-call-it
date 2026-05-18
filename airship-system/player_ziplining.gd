@@ -9,20 +9,20 @@ var is_below: bool
 var is_sliding: bool
 var player_speed: float
 
-func start_riding(player: CharacterBody3D, path_node: Path3D, initial_progress: float) -> void:
+func _start_riding(player: CharacterBody3D, path_node: Path3D, initial_progress: float) -> void:
 	riding_player = player
 	parent_path = path_node
 	progress = initial_progress
 	
-	calculate_zipline_direction(riding_player)
-	is_player_underneath(riding_player)
+	_calculate_zipline_direction(riding_player)
+	_is_player_underneath(riding_player)
 	
 	if zipline_direction < 0:
 		progress_ratio -= 0.05
 	if zipline_direction > 0:
 		progress_ratio += 0.05
 
-func calculate_zipline_direction(player: CharacterBody3D) -> void:
+func _calculate_zipline_direction(player: CharacterBody3D) -> void:
 	var curve = parent_path.get_curve()
 	var path_length: float = curve.get_baked_length()
 	
@@ -50,9 +50,9 @@ func calculate_zipline_direction(player: CharacterBody3D) -> void:
 	var target_quat = target_transform.basis.get_rotation_quaternion()
 	
 	var tween: Tween = create_tween()
-	tween.tween_property(player, "quaternion", target_quat, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(player, "quaternion", target_quat, 1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
-func is_player_underneath(player: CharacterBody3D) -> void:
+func _is_player_underneath(player: CharacterBody3D) -> void:
 	var curve = parent_path.get_curve()
 	var closest_offset = curve.get_closest_offset(parent_path.to_local(player.global_position))
 	var rope_global_pos = parent_path.to_global(curve.sample_baked(closest_offset))
@@ -90,4 +90,4 @@ func _physics_process(delta: float) -> void:
 			
 		if progress_ratio > 0.99 or progress_ratio < 0.01:
 			if parent_path:
-				parent_path.call("_on_player_stop_ziplining", riding_player)
+				parent_path._on_player_stop_ziplining(riding_player)

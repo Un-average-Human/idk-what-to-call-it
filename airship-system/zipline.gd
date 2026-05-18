@@ -2,7 +2,6 @@ extends Path3D
 
 @export var temp_zipline_collision: CollisionPolygon3D
 @export var zipline_area: Area3D
-@export var path_follow: PathFollow3D
 @export_range(0.01, 2.0) var rope_thickness: float = 0.1
 
 var zipline_direction: float = 1.0
@@ -64,6 +63,7 @@ func _on_player_ziplining(body: Node3D) -> void:
 	#creates a pathfollwo for da player
 	var rider_follow = PathFollow3D.new()
 	var shape_cast = ShapeCast3D.new()
+	shape_cast.set_shape(CapsuleShape3D.new())
 	rider_follow.set_script(preload("res://player_ziplining.gd"))
 	add_child(rider_follow)
 	rider_follow.add_child(shape_cast)
@@ -71,7 +71,7 @@ func _on_player_ziplining(body: Node3D) -> void:
 	var player_pos = to_local(body.global_position) + Vector3(0, -2, 0)
 	var closest_point = get_curve().get_closest_offset(player_pos)
 	
-	rider_follow.call("start_riding", body, self, closest_point)
+	rider_follow._start_riding(body, self, closest_point)
 
 func _on_player_stop_ziplining(body) -> void:
 	if active_players.has(body):
@@ -84,7 +84,7 @@ func _on_player_stop_ziplining(body) -> void:
 				child.queue_free()
 				
 		var tween: Tween = create_tween()
-		tween.tween_property(body.neck, "rotation", Vector3.ZERO, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(body.neck, "rotation", Vector3.ZERO, 1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _delete():
 	if temp_zipline_collision:

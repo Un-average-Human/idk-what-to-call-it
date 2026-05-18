@@ -21,6 +21,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [autoload]
 
 SignalBus="*uid://x8w6hewa23gf"
+LinkUx="*uid://5o6je6r802vb"
 
 [editor_plugins]
 
