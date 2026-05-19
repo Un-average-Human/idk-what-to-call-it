@@ -156,13 +156,15 @@ offset_bottom = 201.0
 text = "Lobby Size:"
 vertical_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="create_lobby_menu/lobby_size_label" unique_id=886367912]
+[node name="lobby_size_input" type="SpinBox" parent="create_lobby_menu/lobby_size_label" unique_id=886367912]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 132.0
-offset_right = 251.0
-offset_bottom = 31.0
+offset_left = 102.0
+offset_right = 188.5
+offset_bottom = 36.0
+min_value = 1.0
 max_value = 4.0
-suffix = "Player(s)"
+value = 1.0
 
 [node name="lobby_type_label" type="Label" parent="create_lobby_menu" unique_id=1544877452]
 layout_mode = 0
@@ -199,8 +201,16 @@ offset_left = 132.0
 offset_top = 2.5
 offset_right = 351.0
 offset_bottom = 33.5
-placeholder_text = "Password..."
-max_length = 30
+placeholder_text = "20 characters max"
+max_length = 20
+
+[node name="passcode_error_label" type="Label" parent="create_lobby_menu/lobby_code_label" unique_id=1870701386]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 132.0
+offset_top = 51.0
+offset_right = 351.0
+offset_bottom = 74.0
 
 [node name="create_lobby_button" type="Button" parent="create_lobby_menu" unique_id=994909346]
 unique_name_in_owner = true
@@ -210,3 +220,5 @@ offset_top = 577.0
 offset_right = 535.33997
 offset_bottom = 619.0
 text = "Create Lobby"
+
+[connection signal="text_changed" from="create_lobby_menu/lobby_code_label/password_input" to="." method="_lobby_code_changed"]

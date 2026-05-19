@@ -31,7 +31,9 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 40
 
 [node name="player_board" type="VBoxContainer" parent="players/MarginContainer" unique_id=853749168]
@@ -42,7 +44,7 @@ size_flags_vertical = 3
 [node name="chat" type="ScrollContainer" parent="." unique_id=762892386]
 layout_mode = 0
 offset_left = 708.0
-offset_top = 126.0
+offset_top = 116.0
 offset_right = 1149.0558
 offset_bottom = 564.0
 
@@ -55,17 +57,13 @@ size_flags_vertical = 3
 layout_mode = 0
 offset_top = -10.0
 offset_right = 433.0
-offset_bottom = 420.0
+offset_bottom = 430.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 65
 
 [node name="VBoxContainer" type="VBoxContainer" parent="chat/Control/MarginContainer" unique_id=427550822]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="chat/Control/MarginContainer" unique_id=1170426899]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -85,6 +83,13 @@ offset_top = 376.0
 offset_right = 329.0
 offset_bottom = 416.00003
 placeholder_text = "Type your message here..."
+
+[node name="Panel" type="Panel" parent="chat/Control" unique_id=1170426899]
+layout_mode = 0
+offset_right = 433.0
+offset_bottom = 430.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="players_in_lobby" type="Label" parent="." unique_id=79657355]
 layout_mode = 0

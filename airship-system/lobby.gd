@@ -6,6 +6,7 @@ extends Control
 @onready var lobby_code_label: Label = $lobby_code
 
 var players: Array = []
+var max_players: int
 var lobby_code: String
 var lobby_name: String
 
@@ -16,4 +17,8 @@ func _lobby_created():
 		player_board.add_child(player_label)
 	
 	lobby_name_label.text = lobby_name
-	lobby_code_label.text = "Lobby code: " + lobby_code
+	if !lobby_code.is_empty():
+		lobby_code_label.text = "Lobby code: " + lobby_code
+	else:
+		lobby_code_label.text = ""
+	player_amount_label.text = str(players.size()) + "/" + str(max_players) + " Players"
