@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="airship system"
-run/main_scene="uid://d15rnpjif8qxh"
+run/main_scene="uid://71bmn0d7714o"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]

@@ -20,6 +20,9 @@ extends Control
 @onready var lobby_button_container: VBoxContainer = %lobby_button_container
 
 func _ready() -> void:
+	MultiplayerLobbies.lobby_type = MultiplayerLobbies.lobby_status.PUBLIC
+	
+	
 	create_lobby_menu_button.pressed.connect(_lobby_menu.bind(create_lobby_menu_button))
 	join_lobby_menu_button.pressed.connect(_lobby_menu.bind(join_lobby_menu_button))
 	
@@ -65,8 +68,10 @@ func _check_button(toggled_on: bool, button: CheckButton):
 			lobby_code_label.visible = toggled_on
 			
 			if toggled_on:
+				MultiplayerLobbies.lobby_type = MultiplayerLobbies.lobby_status.PRIVATE
 				_lobby_code_changed(password_input.text)
 			else:
+				MultiplayerLobbies.lobby_type = MultiplayerLobbies.lobby_status.PUBLIC
 				create_lobby_button.disabled = false
 				passcode_error_label.text = ""
 
@@ -114,7 +119,7 @@ func _lobby_code_changed(new_text: String) -> void:
 	passcode_error_label.text = ""
 
 func _lobbies_available():
-	var lobby_distance = MultiplayerLobbies.lobby_search_dist.WORLDWIDE
+	var lobby_distance = MultiplayerLobbies.lobby_search_dist.DEFAULT
 	Steam.addRequestLobbyListDistanceFilter(lobby_distance)
 	MultiplayerLobbies.lobby_button_container = lobby_button_container
 	Steam.requestLobbyList()

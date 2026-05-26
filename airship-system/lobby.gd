@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	leave_lobby.pressed.connect(_leave_lobby)
 	
-	send_message_button.pressed.connect(_send_chat_message)	
+	send_message_button.pressed.connect(_send_chat_message)
 	message_box.text_submitted.connect(_send_chat_message)
 
 func _on_message_received(message: String) -> void:
@@ -57,7 +57,6 @@ func _lobby_created():
 	else:
 		lobby_code_label.text = ""
 	
-	MultiplayerLobbies.lobby_type = MultiplayerLobbies.lobby_status.PRIVATE
 	MultiplayerLobbies._create_lobby(MultiplayerLobbies.lobby_type, max_members)
 
 func _leave_lobby():
