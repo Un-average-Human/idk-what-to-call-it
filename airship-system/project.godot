@@ -21,11 +21,16 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [autoload]
 
 SignalBus="*uid://x8w6hewa23gf"
-LinkUx="*uid://5o6je6r802vb"
+MultiplayerPlayer="*uid://cebgl2my0633q"
+MultiplayerLobbies="*uid://c4cvfa6dojeij"
+
+[debug]
+
+file_logging/enable_file_logging=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/godotsteam/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
 [file_customization]
 
@@ -139,7 +144,6 @@ anti_aliasing/quality/msaa_3d=1
 
 [steam]
 
-initialization/app_id=0
-initialization/initialize_on_startup=false
-initialization/embed_callbacks=false
-multiplayer_peer/max_channels=4
+initialization/app_id=480
+initialization/initialize_on_startup=true
+initialization/embed_callbacks=true

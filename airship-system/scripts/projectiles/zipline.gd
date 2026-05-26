@@ -64,7 +64,7 @@ func _on_player_ziplining(body: Node3D) -> void:
 	var rider_follow = PathFollow3D.new()
 	var shape_cast = ShapeCast3D.new()
 	shape_cast.set_shape(CapsuleShape3D.new())
-	rider_follow.set_script(preload("res://player_ziplining.gd"))
+	rider_follow.set_script(preload("res://scripts/projectiles/player_ziplining.gd"))
 	add_child(rider_follow)
 	rider_follow.add_child(shape_cast)
 	

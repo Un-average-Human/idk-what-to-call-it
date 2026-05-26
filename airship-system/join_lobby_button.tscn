@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://c81ivwojw4s08"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=335003842]
+offset_right = 1152.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=919339882]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1720566933]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="lobby_name_label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1703532009]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "test lobby Five hundred cigarettes I love eatin dawgs "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="member_label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=91016430]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1/4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lobby_type_label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1735048106]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Private    "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="join_button" type="Button" parent="MarginContainer/HBoxContainer" unique_id=425953192]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_vertical = 4
+text = "JOIN"

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1n7acth4s57"]
 
 [ext_resource type="Script" uid="uid://doccfhwxx45sn" path="res://scripts/projectiles/hook_projectile.gd" id="1_1kbep"]
-[ext_resource type="PackedScene" uid="uid://c4jg85h2yi3dk" path="res://rope.tscn" id="2_cedxb"]
+[ext_resource type="PackedScene" uid="uid://c4jg85h2yi3dk" path="res://scenes/projectiles/rope.tscn" id="2_cedxb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1mm2r"]
 size = Vector3(0.22680664, 0.28125, 0.296875)

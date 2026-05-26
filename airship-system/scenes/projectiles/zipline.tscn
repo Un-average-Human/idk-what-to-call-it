@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvl7ucnd5bs0g"]
 
-[ext_resource type="Script" uid="uid://dmpo12bshgjt4" path="res://zipline.gd" id="1_o5dbw"]
+[ext_resource type="Script" uid="uid://dmpo12bshgjt4" path="res://scripts/projectiles/zipline.gd" id="1_o5dbw"]
 
 [sub_resource type="Curve3D" id="Curve3D_t1ypm"]
 

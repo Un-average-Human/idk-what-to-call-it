@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://be7o3nb4op2bf" path="res://player/player_scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://c1fy7lbk6mdpc" path="res://player/player_scene/player_ui.tscn" id="2_t0cpu"]
-[ext_resource type="Script" uid="uid://d1bxlxj6wf54t" path="res://player/player_scene/grappler.gd" id="3_ocfq7"]
+[ext_resource type="Script" uid="uid://d1bxlxj6wf54t" path="res://scenes/equipment/grappler.gd" id="3_ocfq7"]
 [ext_resource type="PackedScene" uid="uid://b7p0171nmce6x" path="res://scenes/projectiles/zipline_projectile.tscn" id="4_qhbuq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
