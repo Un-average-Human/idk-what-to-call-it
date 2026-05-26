@@ -56,6 +56,7 @@ func _on_lobby_created(connect: int, lobby_id: int):
 		_display_message("Created lobby: " + MultiplayerPlayer.lobby_name)
 		
 		Steam.setLobbyData(lobby_id, "name", MultiplayerPlayer.lobby_name)
+		Steam.setLobbyData(lobby_id, "type", str(lobby_type))
 
 
 #join lobbies
