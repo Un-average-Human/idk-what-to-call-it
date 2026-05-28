@@ -16,9 +16,9 @@ var lobby_invite_arg: bool = false
 func _ready() -> void:
 	#checks if the user uh... is opening with a steam acc
 	var init = Steam.get_steam_init_result()
-	#if init['status'] != 1:
-		#print("Steam could not be initialised, closing game.")
-		#get_tree().quit()
+	if init["status"] > 0:
+		print("Steam could not be initialised, Error: ", init["verbal"])
+		get_tree().quit()
 	
 	#set the vars
 	is_online = Steam.loggedOn()
@@ -28,4 +28,4 @@ func _ready() -> void:
 	
 	#checks if the user owns the game
 	if game_owned == false:
-		print("You do not own this game.")
+		print("heyyyy buddy... you could yk... buy it and support me... maybe waybe")

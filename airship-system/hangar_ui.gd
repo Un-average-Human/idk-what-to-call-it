@@ -62,7 +62,7 @@ func _on_button_toggled(toggled_on: bool, button: Button):
 				tween.tween_property(airships_to_buy, "global_position:x", 0.0, 1)
 
 
-func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button_data: AirshipData):
+func _on_airship_button_toggled(toggled_on: bool, airship_button_data: AirshipData):
 	if toggled_on:
 		selected_airship = airship_button_data
 		speed_label.text = "Speed: " + str(airship_button_data.speed) + "KM/H"

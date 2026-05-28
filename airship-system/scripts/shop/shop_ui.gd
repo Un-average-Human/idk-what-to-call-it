@@ -75,7 +75,7 @@ func _on_hide_panel_button_pressed(button: Button):
 				tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 				tween.tween_property(airships_to_buy, "global_position:x", 0.0, 1)
 
-func _on_airship_button_toggled(toggled_on: bool, button: Button, airship_button_data: AirshipData):
+func _on_airship_button_toggled(toggled_on: bool, airship_button_data: AirshipData):
 	if toggled_on:
 		if airship_preview != null:
 			airship_preview.queue_free()

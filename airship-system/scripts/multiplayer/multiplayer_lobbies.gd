@@ -24,7 +24,6 @@ func _ready() -> void:
 	_check_command_line()
 
 #lobby funcs
-#checks if the player is in a lobby and if the arent they create a lobby
 func _create_lobby(lobby_type, lobby_size: int):
 	if MultiplayerPlayer.lobby_id == 0:
 		Steam.createLobby(lobby_type, lobby_size)
@@ -58,11 +57,9 @@ func _on_lobby_created(connect: int, lobby_id: int):
 		Steam.setLobbyData(lobby_id, "name", MultiplayerPlayer.lobby_name)
 		Steam.setLobbyData(lobby_id, "type", str(lobby_type))
 
-
-#join lobbies
 func _on_lobby_joined(lobby_id: int, permissions: int, locked: bool, response: int):
 	MultiplayerPlayer.lobby_id = lobby_id
-	var name = Steam.getLobbyData(lobby_id, "name")
+	var lobby_name = Steam.getLobbyData(lobby_id, "name")
 	MultiplayerPlayer.lobby_name = str(name)
 	_get_lobby_members()
 
@@ -84,11 +81,6 @@ func _on_lobby_match_list(lobbies):
 		
 		var member_label: Label = lobby_button.get_node("%member_label")
 		member_label.text = str(lobby_member) + "/" + str(max_member_count)
-		
-		var lobby_type: Label = lobby_button.get_node("%lobby_type_label")
-		lobby_type.text = Steam.getLobbyData(lobby, "type")
-		if !lobby_type.text.is_empty():
-			lobby_type.text[0].to_upper()
 		
 		var join_button: Button = lobby_button.get_node("%join_button")
 		join_button.pressed.connect(func(): change_scene.emit(false, lobby))
@@ -122,10 +114,10 @@ func _check_command_line():
 	
 	if args.size() > 0:
 		for arg in args:
-			if MultiplayerPlayer.lobby_invite_arg:
-				_join_lobby(int(arg))
 			if arg == "+connect_lobby":
 				MultiplayerPlayer.lobby_invite_arg = true
+			if MultiplayerPlayer.lobby_invite_arg:
+				_join_lobby(int(arg))
 
 func _process(delta: float) -> void:
 	Steam.run_callbacks()

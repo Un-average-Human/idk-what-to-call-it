@@ -52,11 +52,6 @@ func _add_player_to_board(steam_id: int, steam_name: String):
 
 func _lobby_created():
 	lobby_name_label.text = lobby_name
-	if !lobby_code.is_empty():
-		lobby_code_label.text = "Lobby code: " + lobby_code
-	else:
-		lobby_code_label.text = ""
-	
 	MultiplayerLobbies._create_lobby(MultiplayerLobbies.lobby_type, max_members)
 
 func _leave_lobby():

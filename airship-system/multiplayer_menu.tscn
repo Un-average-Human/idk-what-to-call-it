@@ -177,6 +177,7 @@ layout_mode = 0
 offset_left = 132.0
 offset_right = 235.0
 offset_bottom = 36.0
+tooltip_text = "Your lobby won't be shown on the list and can only be joined via invites."
 text = "Private"
 
 [node name="lobby_code_label" type="Label" parent="create_lobby_menu" unique_id=630334763]
@@ -187,26 +188,8 @@ offset_left = 44.0
 offset_top = 315.0
 offset_right = 88.0
 offset_bottom = 351.0
-text = "Lobby Code:"
+text = "Your lobby won't be shown on the list and can only be joined via invites."
 vertical_alignment = 1
-
-[node name="password_input" type="LineEdit" parent="create_lobby_menu/lobby_code_label" unique_id=878288110]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 132.0
-offset_top = 2.5
-offset_right = 351.0
-offset_bottom = 33.5
-placeholder_text = "20 characters max"
-max_length = 20
-
-[node name="passcode_error_label" type="Label" parent="create_lobby_menu/lobby_code_label" unique_id=1870701386]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 132.0
-offset_top = 51.0
-offset_right = 351.0
-offset_bottom = 74.0
 
 [node name="create_lobby_button" type="Button" parent="create_lobby_menu" unique_id=994909346]
 unique_name_in_owner = true
@@ -216,5 +199,3 @@ offset_top = 577.0
 offset_right = 535.33997
 offset_bottom = 619.0
 text = "Create Lobby"
-
-[connection signal="text_changed" from="create_lobby_menu/lobby_code_label/password_input" to="." method="_lobby_code_changed"]

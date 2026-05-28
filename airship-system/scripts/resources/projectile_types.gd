@@ -1,8 +1,6 @@
 extends RigidBody3D
 class_name Projectile
 
-signal collided(at_position: Vector3, projectile: Projectile)
-
 @export var speed: float
 @export var gun: Node
 @export var collision_exceptions: Array
