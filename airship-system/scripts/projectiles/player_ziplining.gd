@@ -50,7 +50,7 @@ func _calculate_zipline_direction(player: CharacterBody3D) -> void:
 	var target_quat = target_transform.basis.get_rotation_quaternion()
 	
 	var tween: Tween = create_tween()
-	tween.tween_property(player, "quaternion", target_quat, 1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(player, "quaternion", target_quat, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _is_player_underneath(player: CharacterBody3D) -> void:
 	var curve = parent_path.get_curve()

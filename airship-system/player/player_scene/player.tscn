@@ -9,29 +9,29 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_i3pqv"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qhbuq"]
-radius = 0.6
-height = 2.2
-
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1113979859 groups=["player"]]
 floor_max_angle = 1.2217305
 script = ExtResource("1_4flbx")
 
 [node name="Control" parent="." unique_id=143926657 instance=ExtResource("2_t0cpu")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1534185416]
+[node name="player_collision" type="CollisionShape3D" parent="." unique_id=1534185416]
+unique_name_in_owner = true
 shape = SubResource("CapsuleShape3D_onrkg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=315402608]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player_collision" unique_id=315402608]
 mesh = SubResource("CapsuleMesh_i3pqv")
 
 [node name="neck" type="Node3D" parent="." unique_id=344994293]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="player_camera" type="Camera3D" parent="neck" unique_id=19096833]
+unique_name_in_owner = true
 near = 0.1
 
 [node name="interact_ray" type="RayCast3D" parent="neck/player_camera" unique_id=334059208]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -9.835062e-08, -1, 0, 2.25, -4.371139e-08, 0, 0, 0)
 collision_mask = 3
 
@@ -41,9 +41,11 @@ target_position = Vector3(0, -1000, 0)
 collision_mask = 3
 
 [node name="right_hand" type="Marker3D" parent="neck/player_camera" unique_id=1252178117]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.5, -1)
 
 [node name="left_hand" type="Marker3D" parent="neck/player_camera" unique_id=894703060]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.5, -1)
 
 [node name="grappler" type="Node" parent="." unique_id=536130371 node_paths=PackedStringArray("player", "ray", "origin")]
@@ -52,7 +54,3 @@ player = NodePath("..")
 projectile_scene = ExtResource("4_qhbuq")
 ray = NodePath("../neck/player_camera/interact_ray2")
 origin = NodePath("../neck/player_camera/left_hand")
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=72015748]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_qhbuq")

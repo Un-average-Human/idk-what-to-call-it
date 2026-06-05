@@ -1,22 +1,22 @@
 extends CharacterBody3D
 
 #camera movement variables
-@onready var neck: Node3D = $neck
-@onready var player_camera: Camera3D = $neck/player_camera
+@onready var neck: Node3D = %neck
+@onready var player_camera: Camera3D = %player_camera
 var SENSITIVITY := 0.01
 var can_freely_move_cam: bool = true
 
 #grabbing system variables
 var left_grabbed_obj: RigidBody3D = null
 var right_grabbed_obj: RigidBody3D = null
-@onready var right_hand: Marker3D = $neck/player_camera/right_hand
-@onready var left_hand: Marker3D = $neck/player_camera/left_hand
+@onready var right_hand: Marker3D = %right_hand
+@onready var left_hand: Marker3D = %left_hand
 
 #interaction variables
-@onready var interact_ray: RayCast3D = $neck/player_camera/interact_ray
+@onready var interact_ray: RayCast3D = %interact_ray
 
 #pilot and seat variables
-@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var collision_shape: CollisionShape3D = %player_collision
 var can_move := true
 var is_piloting := false
 var is_seating := false

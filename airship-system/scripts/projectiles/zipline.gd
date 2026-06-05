@@ -19,8 +19,7 @@ func _input(event: InputEvent) -> void:
 			_on_player_ziplining(target_player)
 			break
 	if event.is_action_pressed("Space"):
-		var active_copy = active_players.duplicate()
-		for riding_player in active_copy:
+		for riding_player in active_players.duplicate():
 			if is_instance_valid(riding_player):
 				_on_player_stop_ziplining(riding_player)
 
@@ -64,7 +63,7 @@ func _on_player_ziplining(body: Node3D) -> void:
 	var rider_follow = PathFollow3D.new()
 	var shape_cast = ShapeCast3D.new()
 	shape_cast.set_shape(CapsuleShape3D.new())
-	rider_follow.set_script(preload("res://scripts/projectiles/player_ziplining.gd"))
+	rider_follow.set_script(preload("uid://dekkm6a6ovlbc"))
 	add_child(rider_follow)
 	rider_follow.add_child(shape_cast)
 	
@@ -84,9 +83,12 @@ func _on_player_stop_ziplining(body) -> void:
 				child.queue_free()
 				
 		var tween: Tween = create_tween()
-		tween.tween_property(body.neck, "rotation", Vector3.ZERO, 1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(body.neck, "rotation", Vector3.ZERO, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _delete():
 	if temp_zipline_collision:
 		temp_zipline_collision.queue_free()
+		for riding_player in active_players.duplicate():
+			if is_instance_valid(riding_player):
+				_on_player_stop_ziplining(riding_player)
 	queue_free()
