@@ -18,32 +18,32 @@ script = ExtResource("1_v65qh")
 
 [node name="item_container" parent="." unique_id=913448438 instance=ExtResource("2_yq78i")]
 layout_mode = 0
-offset_left = -50.000008
-offset_top = -200.0
-offset_right = 49.999992
-offset_bottom = -100.0
+offset_left = -64.00001
+offset_top = -214.0
+offset_right = 63.999992
+offset_bottom = -86.0
 pivot_offset = Vector2(50, 50)
 
 [node name="item_container2" parent="." unique_id=662713168 instance=ExtResource("2_yq78i")]
 layout_mode = 0
-offset_left = 100.0
-offset_top = -50.0
-offset_right = 200.0
-offset_bottom = 50.0
+offset_left = 86.0
+offset_top = -64.0
+offset_right = 214.0
+offset_bottom = 64.0
 pivot_offset = Vector2(50, 50)
 
 [node name="item_container3" parent="." unique_id=1351085114 instance=ExtResource("2_yq78i")]
 layout_mode = 0
-offset_left = -50.000008
-offset_top = 100.0
-offset_right = 49.999992
-offset_bottom = 200.0
+offset_left = -64.00001
+offset_top = 86.0
+offset_right = 63.999992
+offset_bottom = 214.0
 pivot_offset = Vector2(50, 50)
 
 [node name="item_container4" parent="." unique_id=1584640460 instance=ExtResource("2_yq78i")]
 layout_mode = 0
-offset_left = -200.0
-offset_top = -50.00001
-offset_right = -100.0
-offset_bottom = 49.99999
+offset_left = -214.0
+offset_top = -64.000015
+offset_right = -86.0
+offset_bottom = 63.999985
 pivot_offset = Vector2(50, 50)
