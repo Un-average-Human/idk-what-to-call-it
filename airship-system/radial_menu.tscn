@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d3k3orxvydvgm"]
+
+[ext_resource type="Script" uid="uid://og4dqfe4hgwn" path="res://radial_menu.gd" id="1_v65qh"]
+[ext_resource type="PackedScene" uid="uid://civjg2m1x522r" path="res://item_container.tscn" id="2_yq78i"]
+
+[node name="button_container" type="Control" unique_id=157257502]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.001, 0.001)
+script = ExtResource("1_v65qh")
+
+[node name="item_container" parent="." unique_id=913448438 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = -50.000008
+offset_top = -200.0
+offset_right = 49.999992
+offset_bottom = -100.0
+pivot_offset = Vector2(50, 50)
+
+[node name="item_container2" parent="." unique_id=662713168 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+pivot_offset = Vector2(50, 50)
+
+[node name="item_container3" parent="." unique_id=1351085114 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = -50.000008
+offset_top = 100.0
+offset_right = 49.999992
+offset_bottom = 200.0
+pivot_offset = Vector2(50, 50)
+
+[node name="item_container4" parent="." unique_id=1584640460 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = -200.0
+offset_top = -50.00001
+offset_right = -100.0
+offset_bottom = 49.99999
+pivot_offset = Vector2(50, 50)
