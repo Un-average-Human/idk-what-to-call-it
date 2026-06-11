@@ -18,7 +18,7 @@ func _ready() -> void:
 	var init = Steam.get_steam_init_result()
 	if init["status"] > 0:
 		print("Steam could not be initialised, Error: ", init["verbal"])
-		get_tree().quit()
+		#qget_tree().quit()
 	
 	#set the vars
 	is_online = Steam.loggedOn()

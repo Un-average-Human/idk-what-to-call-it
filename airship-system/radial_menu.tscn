@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://og4dqfe4hgwn" path="res://radial_menu.gd" id="1_v65qh"]
 [ext_resource type="PackedScene" uid="uid://civjg2m1x522r" path="res://item_container.tscn" id="2_yq78i"]
+[ext_resource type="Resource" uid="uid://c6bk61dr45yaq" path="res://resources/items/grappler.tres" id="4_jcadp"]
 
-[node name="button_container" type="Control" unique_id=157257502]
-visible = false
+[node name="button_container" type="Control" unique_id=157257502 node_paths=PackedStringArray("starter_menu")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -13,10 +13,22 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.001, 0.001)
 script = ExtResource("1_v65qh")
+starter_menu = NodePath("weapon_menu")
 
-[node name="item_container" parent="." unique_id=913448438 instance=ExtResource("2_yq78i")]
+[node name="weapon_menu" type="Control" parent="." unique_id=1719766349]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.001, 0.001)
+
+[node name="item_container" parent="weapon_menu" unique_id=222599612 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = -64.00001
 offset_top = -214.0
@@ -24,7 +36,7 @@ offset_right = 63.999992
 offset_bottom = -86.0
 pivot_offset = Vector2(50, 50)
 
-[node name="item_container2" parent="." unique_id=662713168 instance=ExtResource("2_yq78i")]
+[node name="item_container2" parent="weapon_menu" unique_id=1733772783 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = 86.0
 offset_top = -64.0
@@ -32,7 +44,7 @@ offset_right = 214.0
 offset_bottom = 64.0
 pivot_offset = Vector2(50, 50)
 
-[node name="item_container3" parent="." unique_id=1351085114 instance=ExtResource("2_yq78i")]
+[node name="item_container3" parent="weapon_menu" unique_id=1476420090 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = -64.00001
 offset_top = 86.0
@@ -40,10 +52,70 @@ offset_right = 63.999992
 offset_bottom = 214.0
 pivot_offset = Vector2(50, 50)
 
-[node name="item_container4" parent="." unique_id=1584640460 instance=ExtResource("2_yq78i")]
+[node name="item_container4" parent="weapon_menu" unique_id=469925570 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = -214.0
 offset_top = -64.000015
 offset_right = -86.0
 offset_bottom = 63.999985
 pivot_offset = Vector2(50, 50)
+
+[node name="grappler_bullet" type="Control" parent="." unique_id=416179490]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.001, 0.001)
+
+[node name="item_container" parent="grappler_bullet" unique_id=936961698 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = -64.00001
+offset_top = -214.0
+offset_right = 63.999992
+offset_bottom = -86.0
+pivot_offset = Vector2(50, 50)
+item_resource = ExtResource("4_jcadp")
+
+[node name="item_container2" parent="grappler_bullet" unique_id=420052764 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = 86.0
+offset_top = -64.0
+offset_right = 214.0
+offset_bottom = 64.0
+pivot_offset = Vector2(50, 50)
+item_resource = ExtResource("4_jcadp")
+
+[node name="item_container3" parent="grappler_bullet" unique_id=2118929451 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = -64.00001
+offset_top = 86.0
+offset_right = 63.999992
+offset_bottom = 214.0
+pivot_offset = Vector2(50, 50)
+item_resource = ExtResource("4_jcadp")
+
+[node name="item_container4" parent="grappler_bullet" unique_id=800950229 instance=ExtResource("2_yq78i")]
+layout_mode = 0
+offset_left = -214.0
+offset_top = -64.000015
+offset_right = -86.0
+offset_bottom = 63.999985
+pivot_offset = Vector2(50, 50)
+item_resource = ExtResource("4_jcadp")
+
+[node name="food_menu" type="Control" parent="." unique_id=1825427083]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.001, 0.001)

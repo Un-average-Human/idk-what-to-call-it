@@ -14,8 +14,8 @@ func _ready() -> void:
 	_on_focus_exited()
 
 	if item_resource:
-		if item_resource.texture:
-			texture_normal = item_resource.texture
+		if item_resource.icon:
+			texture_normal = item_resource.icon
 
 
 func _on_focus_entered():
@@ -23,8 +23,7 @@ func _on_focus_entered():
 	focus_tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	
 	focus_tween.tween_property(self, "scale", Vector2(1.2, 1.2), animation_speed)
-	focus_tween.tween_property(self, "modulate", Color(1.5, 1.5, 1.5), animation_speed)
-	print("Mouse entered the container!")
+	focus_tween.tween_property(self, "modulate", Color(1.25, 1.25, 1.25), animation_speed)
 
 func _on_focus_exited():
 	var focus_tween = create_tween().set_parallel(true)
@@ -32,4 +31,3 @@ func _on_focus_exited():
 	
 	focus_tween.tween_property(self, "scale", Vector2(1.0, 1.0), animation_speed)
 	focus_tween.tween_property(self, "modulate", Color(1, 1, 1), animation_speed)
-	print("Mouse left the container!")

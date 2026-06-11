@@ -23,6 +23,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 SignalBus="*uid://x8w6hewa23gf"
 MultiplayerPlayer="*uid://cebgl2my0633q"
 MultiplayerLobbies="*uid://c4cvfa6dojeij"
+PlayerData="*uid://nm2f1gn4ni3l"
 
 [debug]
 

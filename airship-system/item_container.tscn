@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://civjg2m1x522r"]
 
 [ext_resource type="Script" uid="uid://ddcylac2x6y1p" path="res://item_container.gd" id="1_b6olq"]
-[ext_resource type="Texture2D" uid="uid://kd8bai4qnp35" path="res://icon.svg" id="2_b6olq"]
+[ext_resource type="Resource" uid="uid://073ik0k7bj3a" path="res://resources/items/sword.tres" id="2_b6olq"]
 
 [node name="item_container" type="TextureButton" unique_id=222599612]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 100.0
 offset_bottom = 100.0
 mouse_filter = 1
-texture_normal = ExtResource("2_b6olq")
+ignore_texture_size = true
+stretch_mode = 0
 script = ExtResource("1_b6olq")
+item_resource = ExtResource("2_b6olq")
 animation_speed = 0.1

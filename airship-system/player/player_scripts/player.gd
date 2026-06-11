@@ -15,11 +15,7 @@ var right_grabbed_obj: RigidBody3D = null
 #interaction variables
 @onready var interact_ray: RayCast3D = %interact_ray
 
-#pilot and seat variables
 @onready var collision_shape: CollisionShape3D = %player_collision
-var can_move := true
-var is_piloting := false
-var is_seating := false
 
 #movement variables
 const SPEED := 5.0
@@ -29,16 +25,10 @@ const ACCELERATION = 10.0
 const DECELERATION := 8.0
 
 # money
-var wallet: float = 500.0: set = _set_wallet
-
-#airships
-var owned_airships: Array[AirshipData]
-var airship_spawned: RigidBody3D
 
 #gear
 var is_hooked: bool = false
 var player_attachment: RigidBody3D
-var owned_gear: Array
 
 #shop
 var is_shop_open: bool = false: set = _mouse_mode_manager
@@ -93,13 +83,13 @@ func _input(event: InputEvent) -> void:
 
 	if Input.is_action_just_pressed("E"):
 		#sit
-		if is_piloting == true:
+		if PlayerData.is_piloting == true:
 			_pilot_airship(self.get_parent())
 			return
 		if !interact_ray.is_colliding():
 			return
 		var collider = interact_ray.get_collider()
-		if is_piloting == false:
+		if PlayerData.is_piloting == false:
 			if collider.is_in_group("pilot_seat"):
 				_pilot_airship(collider)
 		
@@ -120,7 +110,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	#wont run if the player is piloting an airship or if they are seating
-	if can_move == false:
+	if PlayerData.can_move == false:
 		return
 	if left_grabbed_obj != null:
 		left_grabbed_obj.linear_velocity = (left_hand.global_position - left_grabbed_obj.global_position) * 20
@@ -154,18 +144,18 @@ func _physics_process(delta: float) -> void:
 #pilot airship and seating function. It only allows a single player to pilot the airshipor sit as of my 
 #current knowledge as I still need to add multiplayer unfortunately
 func _pilot_airship(target_airship):
-	if is_piloting == false:
-		is_piloting = true
-		can_move = false
+	if PlayerData.is_piloting == false:
+		PlayerData.is_piloting = true
+		PlayerData.can_move = false
 		collision_shape.disabled = true
 		global_transform = target_airship.global_transform
 		reparent(target_airship)
 		target_airship.get_parent().player_driving = self
 		target_airship.get_parent().get_node("camera_arm").get_child(0).make_current()
 		
-	elif is_piloting == true:
-		is_piloting = false
-		can_move = true
+	elif PlayerData.is_piloting == true:
+		PlayerData.is_piloting = false
+		PlayerData.can_move = true
 		collision_shape.disabled = false
 		target_airship.get_parent().player_driving = null
 		reparent(get_tree().root)
@@ -175,10 +165,6 @@ func _pilot_airship(target_airship):
 func _sit(target_seat):
 	pass
 
-func _set_wallet(new_value):
-	if wallet != new_value:
-		wallet = new_value
-		SignalBus.update_wallet.emit(wallet)
 func _mouse_mode_manager(new_value):
 	if is_shop_open != new_value:
 		is_shop_open = new_value

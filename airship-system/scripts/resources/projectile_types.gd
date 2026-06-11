@@ -2,12 +2,13 @@ extends RigidBody3D
 class_name Projectile
 
 @export var speed: float
-@export var gun: Node
 @export var collision_exceptions: Array
 @export var player: CharacterBody3D
 @export var cooldown: float
 @export var single_shot: bool
 var can_shoot: bool = true
+
+var gun: Node
 
 func _on_firing():
 	pass
