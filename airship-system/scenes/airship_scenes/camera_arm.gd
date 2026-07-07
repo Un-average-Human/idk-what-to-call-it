@@ -19,7 +19,7 @@ func _input(event: InputEvent) -> void:
 		rotation.x -= event.relative.y * SENSITIVITY
 		rotation.x = clamp(rotation.x, -PI/2, PI/4)
 	
-	if Input.is_action_just_pressed("WheelUp") and spring_length > max_zoom_in:
+	if Input.is_action_just_pressed("zoom_in") and spring_length > max_zoom_in:
 		spring_length -= 1
-	elif Input.is_action_just_pressed("WheelDown") and spring_length < max_zoom_out:
+	elif Input.is_action_just_pressed("zoom_out") and spring_length < max_zoom_out:
 		spring_length += 1

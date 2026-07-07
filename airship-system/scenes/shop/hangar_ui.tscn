@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bfnh4r118aj18"]
 
-[ext_resource type="Script" uid="uid://g5fy163mgfwm" path="res://scripts/airship_scripts/shop/hangar_ui.gd" id="1_7dy4i"]
-[ext_resource type="Resource" uid="uid://cnsiohhchw71u" path="res://resources/shipwrights/ironspire.tres" id="2_6htkn"]
+[ext_resource type="Script" uid="uid://g5fy163mgfwm" path="res://scripts/shop/shop_hangar_ui.gd" id="1_7dy4i"]
 
 [sub_resource type="Theme" id="Theme_7trcf"]
 
@@ -25,28 +24,16 @@ cull_mode = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=737948292 node_paths=PackedStringArray("airship_preview_marker", "empty_hangar_cam", "description_panel_button", "description_panel", "description_label", "speed_label", "capacity_label", "size_label", "go_to_docks_button", "airship_panel_button", "airships_to_spawn", "airship_button_container", "hangar_gui", "docks_gui", "back_to_hangar_button", "previous_dock_button", "next_dock_button", "airship_spawn_button", "close_button")]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=737948292 node_paths=PackedStringArray("description_panel_button", "description_panel", "description_label", "speed_label", "capacity_label", "size_label", "airship_panel_button", "airship_button_container")]
 script = ExtResource("1_7dy4i")
-shipwright_data = ExtResource("2_6htkn")
-airship_preview_marker = NodePath("Node3D/MeshInstance3D/Marker3D")
-empty_hangar_cam = NodePath("Node3D/MeshInstance3D/empty_hangar_camera")
 description_panel_button = NodePath("hangar/description/description_panel_button")
 description_panel = NodePath("hangar/description")
 description_label = NodePath("hangar/description/Panel/MarginContainer/VBoxContainer/description_label")
 speed_label = NodePath("hangar/description/Panel/MarginContainer/VBoxContainer/HBoxContainer/speed")
 capacity_label = NodePath("hangar/description/Panel/MarginContainer/VBoxContainer/HBoxContainer/capacity")
 size_label = NodePath("hangar/description/Panel/MarginContainer/VBoxContainer/HBoxContainer/size")
-go_to_docks_button = NodePath("hangar/description/Panel/MarginContainer/VBoxContainer/go_to_docks_button")
 airship_panel_button = NodePath("hangar/airships/airship_panel_button")
-airships_to_spawn = NodePath("hangar/airships")
 airship_button_container = NodePath("hangar/airships/Panel/ScrollContainer/VBoxContainer")
-hangar_gui = NodePath("hangar")
-docks_gui = NodePath("docks")
-back_to_hangar_button = NodePath("docks/back_to_hangar")
-previous_dock_button = NodePath("docks/previous_dock")
-next_dock_button = NodePath("docks/next_dock")
-airship_spawn_button = NodePath("docks/spawn")
-close_button = NodePath("hangar/close_button")
 
 [node name="hangar" type="Control" parent="." unique_id=1858967364]
 layout_mode = 3

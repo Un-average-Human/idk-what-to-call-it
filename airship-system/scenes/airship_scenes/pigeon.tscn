@@ -1121,7 +1121,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_31jya")
 
-[node name="balloon" type="RigidBody3D" unique_id=726071326 node_paths=PackedStringArray("helm", "rudder", "propellers", "camera_arm")]
+[node name="balloon" type="RigidBody3D" unique_id=726071326 node_paths=PackedStringArray("helm", "rudder", "propellers", "pilot_seat", "camera_arm")]
 mass = 300.0
 can_sleep = false
 angular_damp = 1.0
@@ -1131,6 +1131,7 @@ helm = NodePath("helm")
 rudder = NodePath("rudder")
 propellers = [NodePath("right_propeller"), NodePath("left_propeller")]
 propeller_rotating_speed = 8.0
+pilot_seat = NodePath("pilot_seat")
 camera_arm = NodePath("camera_arm")
 
 [node name="CollisionShape3D15" type="CollisionShape3D" parent="." unique_id=664207796]

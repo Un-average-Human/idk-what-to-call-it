@@ -60,7 +60,7 @@ offset_right = -86.0
 offset_bottom = 63.999985
 pivot_offset = Vector2(50, 50)
 
-[node name="grappler_bullet" type="Control" parent="." unique_id=416179490]
+[node name="grappler_hooks" type="Control" parent="." unique_id=416179490]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -72,7 +72,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.001, 0.001)
 
-[node name="item_container" parent="grappler_bullet" unique_id=936961698 instance=ExtResource("2_yq78i")]
+[node name="item_container" parent="grappler_hooks" unique_id=936961698 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = -64.00001
 offset_top = -214.0
@@ -81,7 +81,7 @@ offset_bottom = -86.0
 pivot_offset = Vector2(50, 50)
 item_resource = ExtResource("4_jcadp")
 
-[node name="item_container2" parent="grappler_bullet" unique_id=420052764 instance=ExtResource("2_yq78i")]
+[node name="item_container2" parent="grappler_hooks" unique_id=420052764 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = 86.0
 offset_top = -64.0
@@ -90,7 +90,7 @@ offset_bottom = 64.0
 pivot_offset = Vector2(50, 50)
 item_resource = ExtResource("4_jcadp")
 
-[node name="item_container3" parent="grappler_bullet" unique_id=2118929451 instance=ExtResource("2_yq78i")]
+[node name="item_container3" parent="grappler_hooks" unique_id=2118929451 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = -64.00001
 offset_top = 86.0
@@ -99,7 +99,7 @@ offset_bottom = 214.0
 pivot_offset = Vector2(50, 50)
 item_resource = ExtResource("4_jcadp")
 
-[node name="item_container4" parent="grappler_bullet" unique_id=800950229 instance=ExtResource("2_yq78i")]
+[node name="item_container4" parent="grappler_hooks" unique_id=800950229 instance=ExtResource("2_yq78i")]
 layout_mode = 0
 offset_left = -214.0
 offset_top = -64.000015

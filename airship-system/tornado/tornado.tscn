@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://be8q63n4je2yc"]
 
-[ext_resource type="Shader" uid="uid://cp4e6hjsb1l2h" path="res://tornado/whiteT.tres" id="1_gtmom"]
-[ext_resource type="ArrayMesh" uid="uid://b0tvpyjac1cr" path="res://tornado/big_tornado.obj" id="2_wc5p8"]
+[ext_resource type="Shader" uid="uid://cp4e6hjsb1l2h" path="res://tornado/whiteT.tres" id="1_0isvb"]
+[ext_resource type="ArrayMesh" uid="uid://b0tvpyjac1cr" path="res://tornado/meshes/big_tornado.obj" id="2_o338m"]
 
 [sub_resource type="Gradient" id="Gradient_ycc7c"]
 offsets = PackedFloat32Array(0, 0.532995, 1)
@@ -28,7 +28,7 @@ color_ramp = SubResource("Gradient_fc7qp")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ivbbc"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("1_gtmom")
+shader = ExtResource("1_0isvb")
 shader_parameter/speedWobble = 1.0
 shader_parameter/wobble = 0.5
 shader_parameter/intesityColor = 15.0
@@ -65,7 +65,7 @@ color_ramp = SubResource("Gradient_havti")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yap6x"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("1_gtmom")
+shader = ExtResource("1_0isvb")
 shader_parameter/speedWobble = 1.0
 shader_parameter/wobble = 0.5
 shader_parameter/intesityColor = 5.0
@@ -97,7 +97,7 @@ color_ramp = SubResource("Gradient_4c7ih")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esu27"]
 render_priority = 0
-shader = ExtResource("1_gtmom")
+shader = ExtResource("1_0isvb")
 shader_parameter/speedWobble = 1.0
 shader_parameter/wobble = 0.2
 shader_parameter/intesityColor = 30.0
@@ -129,7 +129,7 @@ color_ramp = SubResource("Gradient_8j7sn")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bvt4"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("1_gtmom")
+shader = ExtResource("1_0isvb")
 shader_parameter/speedWobble = 0.0
 shader_parameter/wobble = 0.0
 shader_parameter/intesityColor = 5.0
@@ -148,17 +148,17 @@ height = 0.1
 [node name="twhite" type="MeshInstance3D" parent="." unique_id=896096424]
 transform = Transform3D(0.467656, 0, -1.56776, 0, 1.163, 0, 1.42524, 0, 0.514422, 5.58733, 100.180885, -4.134879)
 material_override = SubResource("ShaderMaterial_ivbbc")
-mesh = ExtResource("2_wc5p8")
+mesh = ExtResource("2_o338m")
 
 [node name="twhite2" type="MeshInstance3D" parent="." unique_id=2022835157]
 transform = Transform3D(0.779428, 0, -2.18536, 0, 1.5, 0, 2.37539, 0, 0.717074, 5.58733, 100.180885, -4.134879)
 material_override = SubResource("ShaderMaterial_yap6x")
-mesh = ExtResource("2_wc5p8")
+mesh = ExtResource("2_o338m")
 
 [node name="twhite3" type="MeshInstance3D" parent="." unique_id=228984607]
 transform = Transform3D(0.623542, 0, -1.90031, 0, 1.25, 0, 1.90031, 0, 0.623542, 5.58733, 100.180885, -4.134879)
 material_override = SubResource("ShaderMaterial_esu27")
-mesh = ExtResource("2_wc5p8")
+mesh = ExtResource("2_o338m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1027545567]
 transform = Transform3D(56, 0, 0, 0, 7, 0, 0, 0, 56, 6.10977, 0.27928162, -4.768659)

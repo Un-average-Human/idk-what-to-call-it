@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://71bmn0d7714o"]
 
-[ext_resource type="Script" uid="uid://dp5liknjb8j0" path="res://multiplayer_menu.gd" id="1_6py18"]
-[ext_resource type="PackedScene" uid="uid://maebdulg310o" path="res://lobby.tscn" id="2_326qw"]
+[ext_resource type="Script" uid="uid://dp5liknjb8j0" path="res://scripts/multiplayer/multiplayer_menu.gd" id="1_6py18"]
+[ext_resource type="PackedScene" uid="uid://maebdulg310o" path="res://scenes/multiplayer/lobby.tscn" id="2_326qw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_326qw"]
 font_size = 30

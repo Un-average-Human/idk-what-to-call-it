@@ -14,11 +14,11 @@ var players_inside_zone: Array[CharacterBody3D] = []
 var player_speed: float
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("E"):
+	if event.is_action_pressed("interact"):
 		for target_player in players_inside_zone:
 			_on_player_ziplining(target_player)
 			break
-	if event.is_action_pressed("Space"):
+	if event.is_action_pressed("jump"):
 		for riding_player in active_players.duplicate():
 			if is_instance_valid(riding_player):
 				_on_player_stop_ziplining(riding_player)
@@ -57,7 +57,7 @@ func _on_player_ziplining(body: Node3D) -> void:
 	active_players.append(body)
 	players_inside_zone.erase(body)
 	
-	body.can_move = false
+	PlayerData.can_move = false
 	
 	#creates a pathfollwo for da player
 	var rider_follow = PathFollow3D.new()
@@ -75,8 +75,8 @@ func _on_player_ziplining(body: Node3D) -> void:
 func _on_player_stop_ziplining(body) -> void:
 	if active_players.has(body):
 		active_players.erase(body)
-		body.can_move = true
-		body.can_freely_move_cam = true
+		PlayerData.can_move = true
+		PlayerData.can_freely_move_cam = true
 		
 		for child in get_children():
 			if child is PathFollow3D and child.get("riding_player") == body:

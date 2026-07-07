@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ckism4k1xy3po" path="res://tornado.gd" id="1_b05kn"]
 [ext_resource type="Shader" uid="uid://cp4e6hjsb1l2h" path="res://tornado/whiteT.tres" id="1_yyyt4"]
-[ext_resource type="ArrayMesh" uid="uid://b0tvpyjac1cr" path="res://tornado/big_tornado.obj" id="2_b05kn"]
+[ext_resource type="ArrayMesh" uid="uid://b0tvpyjac1cr" path="res://tornado/meshes/big_tornado.obj" id="2_b05kn"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ohrl4"]
 height = 211.36914

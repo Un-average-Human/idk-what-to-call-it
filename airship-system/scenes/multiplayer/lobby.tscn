@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://maebdulg310o"]
 
-[ext_resource type="Script" uid="uid://bxxs8iemm76ty" path="res://lobby.gd" id="1_ll2xe"]
+[ext_resource type="Script" uid="uid://bxxs8iemm76ty" path="res://scripts/multiplayer/lobby.gd" id="1_ll2xe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r5v3i"]
 font_size = 25

@@ -44,7 +44,7 @@ func _calculate_zipline_direction(player: CharacterBody3D) -> void:
 		target_rotation = parent_path.to_global(curve.sample_baked(0.0))
 	
 	target_rotation.y = player.global_position.y
-	player.can_freely_move_cam = false
+	PlayerData.can_freely_move_cam = false
 	
 	var target_transform = player.global_transform.looking_at(target_rotation, Vector3.UP)
 	var target_quat = target_transform.basis.get_rotation_quaternion()
@@ -81,7 +81,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				player_speed = 4.0
 			
-		var input = Input.get_axis("S", "W")
+		var input = Input.get_axis("backward", "forward")
 		
 		if is_sliding:
 			input = 1.0

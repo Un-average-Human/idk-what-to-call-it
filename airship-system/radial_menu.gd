@@ -6,17 +6,22 @@ extends Control
 	set(value):
 		radius = value
 		_refresh()
-@export var starter_menu: Control
 
+@export var starter_menu: Control
 var current_menu: Control
+var menus: Array[Control]
+var menu_id: int = 0
+
 var tween: Tween
 
 func _ready() -> void:
-	current_menu = starter_menu
-	current_menu.scale = Vector2(0.001, 0.001)
-	current_menu.hide()
-	current_menu.child_entered_tree.connect(_refresh)
-	current_menu.child_exiting_tree.connect(_on_child_exiting)
+	for menu in get_children():
+		menus.append(menu)
+		menu.scale = Vector2(0.001, 0.001)
+		menu.hide()
+		menu.child_entered_tree.connect(_refresh)
+		menu.child_exiting_tree.connect(_on_child_exiting)
+	current_menu = menus[menu_id]
 	
 	_refresh()
 
@@ -28,7 +33,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		current_menu.show()
 		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(current_menu, "scale", Vector2.ONE, animation_speed)
-
 	if Input.is_action_just_released("Q"):
 		if tween and tween.is_valid():
 			tween.kill()
@@ -37,6 +41,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		tween.tween_property(current_menu, "scale", Vector2.ZERO, animation_speed)
 		tween.tween_callback(current_menu.hide)
 		_select_item()
+
+	if Input.is_action_just_pressed("G"):
+		if current_menu == menus[menus.size() - 1]:
+			current_menu == menus[0]
+		else:
+			menu_id += 1
+			current_menu = menus[menu_id]
+			
+	if Input.is_action_just_pressed("F"):
+		if current_menu == menus[0]:
+			current_menu == menus[menus.size() - 1]
+		else:
+			menu_id -= 1
+			current_menu = menus[menu_id]
 
 func _refresh(_child = null):
 	var spacing = TAU / current_menu.get_child_count()
@@ -60,4 +78,9 @@ func _select_item():
 		if selected_node.item_resource:
 			var selected_item = selected_node.item_resource
 			print("Selected item: ", selected_item.item_name)
-		
+
+func _close_menu():
+	pass
+
+func _open_menu():
+	pass

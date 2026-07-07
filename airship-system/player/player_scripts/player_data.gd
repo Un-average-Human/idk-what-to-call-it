@@ -10,8 +10,11 @@ var airship_spawned: RigidBody3D
 #gears
 var owned_gear: Array
 
-#pilot
+#camera
 var can_move := true
+var can_freely_move_cam: bool = true
+
+#pilot
 var is_piloting := false
 var is_seating := false
 
